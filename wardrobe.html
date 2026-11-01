@@ -727,20 +727,42 @@ async function importPublishedCloset(){
   if(!Array.isArray(rows)||!rows.length)throw Error('公開衣櫃資料為空');
   const valid=rows.filter(c=>c&&Number.isInteger(Number(c.no))&&Number(c.no)>0&&typeof c.img==='string'&&c.img.startsWith('data:image/')&&typeof c.name==='string');
   if(valid.length!==rows.length)throw Error('部分資料格式不完整，已取消匯入');
-  // Photo fingerprints are independent of old/new numbering. Match the whole
-  // base64 photo to protect existing manually edited names, brands and materials.
+  // Preserve edited clothing records: image-only comparison cannot detect the
+  // same garment after a crop, photo replacement, or background cleanup.
   const imageKey=src=>{const v=String(src||'');let h=2166136261>>>0;for(let i=0;i<v.length;i++){h^=v.charCodeAt(i);h=Math.imul(h,16777619)>>>0}return v.length+':'+h.toString(16)};
+  const normalizeName=v=>String(v||'').normalize('NFKC').toLocaleLowerCase().replace(/[\p{P}\p{S}\s]+/gu,'').trim();
+  const usefulName=v=>v&&v.length>=5&&!/^待命名單品|^item\d+$|^untitled/.test(v);
+  const sameCategory=(a,b)=>Boolean(a&&b&&a===b&&a!=='未分類');
   const existingImages=new Set(clothes.flatMap(c=>[c.img,c.originalImg].filter(Boolean).map(imageKey)));
-  const existingImportKeys=new Set(clothes.map(c=>c.importKey).filter(Boolean));
-  const seen=new Set(existingImages),candidates=[];let skipped=0;
+  const existingNames=new Map();
+  for(const item of clothes){const key=normalizeName(item.name);if(usefulName(key)){const arr=existingNames.get(key)||[];arr.push(item);existingNames.set(key,arr)}}
+  const existingByNo=new Map(clothes.map(c=>[Number(c.no),c]));
+  const existingImportKeys=new Map(clothes.filter(c=>c.importKey).map(c=>[c.importKey,c]));
+  const seenImages=new Set(existingImages),seenNames=new Set(existingNames.keys());
+  const candidates=[];let skipped=0,uncertain=0;
   for(const c of [...valid].sort((a,b)=>Number(a.no)-Number(b.no))){
-   const ik='github-closet-'+Number(c.no),pk=imageKey(c.img);
-   // Do not blindly trust the number alone: a newly revised public catalog
-   // could reuse a number for another garment.
-   if(seen.has(pk)){skipped++;continue}
-   candidates.push(c);seen.add(pk);
+   const photo=imageKey(c.img),name=normalizeName(c.name),key='github-closet-'+Number(c.no);
+   // Existing edited photos match by their original source key OR an unchanged
+   // descriptive name, even if their binary images no longer match.
+   const sameNamed=usefulName(name)&&seenNames.has(name);
+   const keyed=existingImportKeys.get(key);
+   const consistentKeyed=keyed&&(normalizeName(keyed.name)===name||sameCategory(keyed.category,c.category)&&normalizeName(keyed.name).includes(name)&&name.length>=8);
+   if(seenImages.has(photo)||sameNamed||consistentKeyed){skipped++;continue}
+   // Number is only a weak hint. If the slot is occupied by a garment of the
+   // same category, don't silently duplicate it or overwrite it. This can
+   // also hide a real new item, so report it as requiring manual review.
+   const occupant=existingByNo.get(Number(c.no));
+   if(occupant&&sameCategory(occupant.category,c.category)){
+    const oldName=normalizeName(occupant.name);
+    if(usefulName(oldName)&&usefulName(name)){
+     const common=oldName.length>=name.length?oldName.includes(name):name.includes(oldName);
+     if(common){skipped++;continue}
+    }
+    uncertain++;continue;
+   }
+   candidates.push(c);seenImages.add(photo);if(usefulName(name))seenNames.add(name);
   }
-  const message=`公開衣櫃共 ${valid.length} 件；比對後預計新增 ${candidates.length} 件、略過重複 ${skipped} 件。只加入新照片，不覆蓋目前衣櫃已編輯的名稱、品牌、材質或照片。確定繼續？`;
+  const message=`公開衣櫃共 ${valid.length} 件；比對後預計新增 ${candidates.length} 件、略過重複 ${skipped} 件、待人工確認 ${uncertain} 件。只加入可辨識的新品，不覆蓋目前衣櫃已編輯的名稱、品牌、材質或照片。確定繼續？`;
   const proceed=await askConfirm(message,'匯入公開衣櫃','確定繼續','取消匯入');
   if(!proceed){status.textContent='已取消匯入，原有衣櫃不變';return}
   let added=0;
@@ -750,8 +772,8 @@ async function importPublishedCloset(){
    await put('clothes',item);added++;
   }
   await refresh();
-  status.textContent=`匯入完成：新增 ${added} 件，略過重複 ${skipped} 件。新增衣物可在「最近匯入」確認。`;
-  notify(`新增 ${added} 件，略過重複 ${skipped} 件`);
+  status.textContent=`匯入完成：新增 ${added} 件，略過重複 ${skipped} 件，另有 ${uncertain} 件因照片及名稱變更或編號衝突而暫不匯入，請人工確認。新增衣物可在「最近匯入」確認。`;
+  notify(`新增 ${added} 件；略過 ${skipped} 件；待確認 ${uncertain} 件`);
  }catch(e){status.textContent='匯入失敗：'+e.message;notify('匯入失敗，原衣櫃未刪除')}
  finally{btn.disabled=false}
 }
