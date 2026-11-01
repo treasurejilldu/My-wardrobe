@@ -59,7 +59,7 @@ nav button svg{display:block;width:19px;height:19px;flex:none}
 
 /* V4.7 · single-screen editorial board */
 .board-wrap{width:100%;max-width:530px;margin:10px auto 6px}
-.outfit-canvas{min-height:0!important;max-height:640px;overflow:hidden}
+.outfit-canvas{min-height:0!important;max-height:520px;overflow:hidden}
 .outfit-card{height:var(--card-height,165px)!important;width:var(--card-width,52%)!important}
 
 /* V4.10 · legible full-size garments within a single phone board */
@@ -449,13 +449,18 @@ async function replaceImg(f){if(!f)return;changedImg=await imageData(f);$('editI
 async function saveEdit(){const c=clothes.find(x=>x.id===current);if(!c)return;addEditorTag('brand');addEditorTag('material');c.name=$('editName').value.trim()||`待命名單品 #${c.no}`;c.category=$('editCat').value;c.categoryManual=true;c.brand=editorTags.brand[0]||'';c.material=editorTags.material.join('、');c.memo=$('editMemo').value.trim();saveValueToHistory('brand',c.brand);saveValueToHistory('material',c.material);if(changedImg){c.img=changedImg;c.originalImg=changedImg;}await put('clothes',c);closeEditor();await refresh();notify('已儲存')}
 async function deleteItem(){const c=clothes.find(x=>x.id===current);if(!c)return;if(!await askConfirm(`確定刪除 #${c.no}「${c.name}」？`, '刪除單品'))return;await del('clothes',c.id);for(const l of looks){l.ids=(l.ids||[]).filter(id=>id!==c.id);await put('looks',l)}slots=slots.map(x=>x===c.id?null:x);closeEditor();await refresh();notify('單品已刪除')}
 let boardPositions={};let draggingOutfit=null;
+// Only store positions the user explicitly dragged.
+// Automatic layout should be recalculated fresh on every render so changing
+// background-removal strength or calling out clothes again will not leave
+// stale coordinates that stretch the visual spacing.
+let boardManualPositions={};
 let boardBgEnabled=true,boardBgStrength=22;
 try{const settings=JSON.parse(localStorage.getItem('wardrobe-board-bg-v4')||'{}');if(typeof settings.enabled==='boolean')boardBgEnabled=settings.enabled;if(Number.isFinite(settings.strength))boardBgStrength=Math.max(8,Math.min(52,settings.strength));}catch(e){}
 const bgCache=new Map();let bgRenderSeq=0;
 function persistBoardBackground(){try{localStorage.setItem('wardrobe-board-bg-v4',JSON.stringify({enabled:boardBgEnabled,strength:boardBgStrength}))}catch(e){}}
 function syncBoardBackgroundUi(){const b=$('bgModeBtn'),i=$('bgStrength'),v=$('bgStrengthValue');if(b)b.textContent=boardBgEnabled?'白底去背：開':'顯示原圖';if(i){i.value=boardBgStrength;i.disabled=!boardBgEnabled}if(v)v.textContent=boardBgStrength}
-function toggleBoardBackground(){boardBgEnabled=!boardBgEnabled;persistBoardBackground();renderBoard()}
-function setBoardStrength(n){boardBgStrength=Math.max(8,Math.min(52,Number(n)||22));persistBoardBackground();renderBoard()}
+function toggleBoardBackground(){boardBgEnabled=!boardBgEnabled;persistBoardBackground();boardPositions={...boardManualPositions};renderBoard()}
+function setBoardStrength(n){boardBgStrength=Math.max(8,Math.min(52,Number(n)||22));persistBoardBackground();boardPositions={...boardManualPositions};renderBoard()}
 function removeWhiteBackground(src,strength){return new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>{try{const w=im.naturalWidth,h=im.naturalHeight;if(w*h>3500000)throw new Error('圖片尺寸過大');const cv=document.createElement('canvas');cv.width=w;cv.height=h;const ctx=cv.getContext('2d',{willReadFrequently:true});ctx.drawImage(im,0,0);const data=ctx.getImageData(0,0,w,h),a=data.data;const marked=new Uint8Array(w*h);const queue=new Int32Array(w*h);let head=0,tail=0;
 // Mark only near-white pixels connected to the outer border; preserve interior white details.
 const cutoff=255-strength;const isBg=(idx)=>{const j=idx*4,r=a[j],g=a[j+1],b=a[j+2];return a[j+3]<20||(Math.min(r,g,b)>=cutoff&&Math.max(r,g,b)-Math.min(r,g,b)<Math.max(16,strength*.7))};
@@ -527,37 +532,38 @@ function boardTier(c){
  return 1;
 }
 function compactBoardHeight(){
- // One glance: keep the whole board inside the phone screen,
- // but allow a little more room so each garment can look larger.
- const vh=window.visualViewport?.height||window.innerHeight||750;
- return Math.max(405,Math.min(640,Math.round(vh*.76)));
+ // iPhone document viewers can change visualViewport.height when a slider is
+ // touched, Safari chrome shifts or the page scrolls. Never use that volatile
+ // height to lay out the board: it causes the canvas to stretch mid-outfit.
+ // The canvas width stays stable across all of those interactions.
+ const width=$('board')?.getBoundingClientRect().width||$('board')?.parentElement?.clientWidth||window.innerWidth||375;
+ return Math.max(405,Math.min(520,Math.round(width*1.12)));
 }
 let boardSizes={};
 function boardCardSize(id){
  return boardSizes[id]||{width:34,height:120};
 }
 function autoBoardLayout(ids){
- const H=compactBoardHeight(),board=$('board');board.style.height=H+'px';
+ const H=compactBoardHeight(),board=$('board');board.style.height=H+'px';board.style.minHeight='0';board.style.maxHeight=H+'px';
  const entries=ids.map((id,i)=>{const item=clothes.find(x=>x.id===id);return {id,i,tier:boardTier(item),dress:isDressItem(item),dressLength:dressLength(item)}});
  const accessoryGroup=entries.filter(e=>e.tier===0);
  const dressGroup=entries.filter(e=>e.dress);
- const upperGroup=entries.filter(e=>!e.dress&&(e.tier===1||e.tier===2));
+ const topGroup=entries.filter(e=>!e.dress&&e.tier===1);
+ const outerGroup=entries.filter(e=>!e.dress&&e.tier===2);
  const lowerGroup=entries.filter(e=>e.tier===3);
  // Keep V4.16 sizes and spacing, while treating dresses as one-piece items
  // that visually occupy both the upper-body and lower-body area.
  const spec={
   accessory:{width:24,height:83,centerY:1},
-  upper:{width:32,height:178,centerY:17.5},
+  top:{width:32,height:178,centerY:17.5},
+  outer:{width:32,height:178,centerY:22.5},
   lower:{width:33,height:170,centerY:69},
   dress:{width:40,height:Math.max(250,Math.min(310,Math.round(H*.58))),centerY:26}
  };
  const positions={};boardSizes={};
  const layoutGroup=(original,kind)=>{
   const s=spec[kind];
-  const group=kind==='upper'?[...original].sort((a,b)=>{
-    const priority=e=>e.tier===1?0:1;
-    return priority(a)-priority(b)||a.i-b.i;
-  }):original;
+  const group=original;
   group.forEach((e,i)=>{
    // V4.20: scale just the one-piece frame, with object-fit:contain keeping natural proportions.
    const base=s;
@@ -566,11 +572,17 @@ function autoBoardLayout(ids){
    const {width,height}=itemSpec;
    const row=Math.floor(i/3),col=i%3;
    let x;
-   if(kind==='upper'){
-    const center=(100-width)/2;
-    if(i===0)x=center;
-    else if(i%2===1)x=3;
-    else x=100-width-3;
+   if(kind==='top'){
+    // Tops remain centered as a group. With two tops, distribute them
+    // symmetrically; with more, share the centered band evenly.
+    const count=group.length;
+    const step=count===1?0:Math.min(width*.94,58/(count-1));
+    x=(100-width)/2+(i-(count-1)/2)*step;
+   }else if(kind==='outer'){
+    // Coats/jackets always flank the centered tops, sharing one top line.
+    // Extra outerwear uses nearby side-by-side offsets, not vertical rows.
+    const side=i%2;const depth=Math.floor(i/2);
+    x=side===0?2+depth*5:100-width-2-depth*5;
    }else if(kind==='dress'){
     const center=(100-width)/2;
     if(group.length===1)x=center;
@@ -581,9 +593,8 @@ function autoBoardLayout(ids){
    else if(col===0)x=kind==='accessory'?11:4;
    else if(col===1)x=100-width-(kind==='accessory'?11:4);
    else x=(100-width)/2;
-   let y=s.centerY+row*(kind==='accessory'?8:kind==='upper'?10:kind==='dress'?8:8);
+   let y=s.centerY+(kind==='top'||kind==='outer'?0:row*(kind==='accessory'?8:8));
    if(kind==='accessory'&&i%2===1)y+=2;
-   if(kind==='upper'&&i>0&&i%2===0)y+=3;
    if(kind==='dress'&&i%2===1)y+=3;
    const maxY=Math.max(1,100-height/H*100-2);
    positions[e.id]={x:Math.max(1,Math.min(99-width,x)),y:Math.max(1,Math.min(maxY,y))};
@@ -592,7 +603,35 @@ function autoBoardLayout(ids){
  };
  layoutGroup(accessoryGroup,'accessory');
  layoutGroup(dressGroup,'dress');
- layoutGroup(upperGroup,'upper');
+ // V4.30: distribute tops + outerwear together across separate lanes.
+ // Three items or fewer get non-overlapping 32%-wide frames; one key top
+ // stays in the center whenever coats are present. For four or more items,
+ // allow gentle lateral overlap rather than shrinking the garment images.
+ const uppers=[...topGroup,...outerGroup];
+ if(uppers.length<=3){
+  const lanes=uppers.length===1?[34]:uppers.length===2?[2,66]:[2,34,66];
+  let arranged;
+  if(uppers.length===1)arranged=uppers;
+  else if(uppers.length===2&&topGroup.length&&outerGroup.length){
+   // Main top takes center; coat uses the left flank.
+   arranged=[outerGroup[0],topGroup[0]];
+   lanes.splice(0,lanes.length,2,34);
+  }else if(uppers.length===3&&topGroup.length===1&&outerGroup.length===2){
+   arranged=[outerGroup[0],topGroup[0],outerGroup[1]];
+  }else if(uppers.length===3&&topGroup.length===2&&outerGroup.length===1){
+   arranged=[outerGroup[0],topGroup[0],topGroup[1]];
+  }else arranged=uppers;
+  arranged.forEach((e,i)=>{
+   const isOuter=e.tier===2,s=spec[isOuter?'outer':'top'];
+   const y=s.centerY;
+   positions[e.id]={x:lanes[i],y:Math.min(y,Math.max(1,100-s.height/H*100-2))};
+   boardSizes[e.id]={width:s.width,height:s.height};
+  });
+ }else{
+  // The center is reserved for tops, outerwear frames remain at the edges.
+  layoutGroup(topGroup,'top');
+  layoutGroup(outerGroup,'outer');
+ }
  layoutGroup(lowerGroup,'lower');
  return positions;
 }
@@ -600,17 +639,20 @@ function renderBoard(){
  syncBoardBackgroundUi();const sequence=++bgRenderSeq;
  const ids=[...new Set(slots.filter(Boolean))].filter(id=>clothes.some(c=>c.id===id));
  const automatic=autoBoardLayout(ids);const height=$('board').clientHeight||560;
- $('board').innerHTML=ids.map((id,i)=>{const c=clothes.find(x=>x.id===id);const size=boardCardSize(id);const raw=boardPositions[id]||automatic[id];const boardH=$('board').clientHeight||compactBoardHeight();const pos={x:Math.max(0,Math.min(100-size.width,raw.x)),y:Math.max(0,Math.min(100-size.height/boardH*100,raw.y))};return `<div class="outfit-card" data-id="${id}" style="--card-width:${size.width}%;--card-height:${size.height}px;left:${pos.x}%;top:${pos.y}%;z-index:${i+1}" onpointerdown="boardPointerDown(event,'${id}')"><img src="${c.img}" alt="${esc(c.name)}"><span class="item-tag">#${c.no}</span><button type="button" class="remove" aria-label="移除 #${c.no}" onclick="event.stopPropagation();removeBoardItem('${id}')">×</button></div>`}).join('')+(ids.length?'':'<div class="board-empty">用編號叫出衣服，開始搭配</div>');
- // A saved/manual position should not be reset by later automatic layout changes.
+ $('board').innerHTML=ids.map((id,i)=>{const c=clothes.find(x=>x.id===id);const size=boardCardSize(id);const raw=boardManualPositions[id]||automatic[id];const boardH=$('board').clientHeight||compactBoardHeight();const pos={x:Math.max(0,Math.min(100-size.width,raw.x)),y:Math.max(0,Math.min(100-size.height/boardH*100,raw.y))};return `<div class="outfit-card" data-id="${id}" style="--card-width:${size.width}%;--card-height:${size.height}px;left:${pos.x}%;top:${pos.y}%;z-index:${i+1}" onpointerdown="boardPointerDown(event,'${id}')"><img src="${c.img}" alt="${esc(c.name)}"><span class="item-tag">#${c.no}</span><button type="button" class="remove" aria-label="移除 #${c.no}" onclick="event.stopPropagation();removeBoardItem('${id}')">×</button></div>`}).join('')+(ids.length?'':'<div class="board-empty">用編號叫出衣服，開始搭配</div>');
+ // Keep a copy of the latest automatic layout. Only truly dragged items are
+ // kept in boardManualPositions; everything else should use these fresh values.
  currentAutoPositions=automatic;
+ boardPositions={...automatic,...boardManualPositions};
+ $('board').scrollTop=0;
  updateBoardImages(ids,sequence);
 }
 let currentAutoPositions={};
-function defaultPos(id){return currentAutoPositions[id]||{x:2,y:3}}
-function boardPointerDown(e,id){if(e.target.closest('button'))return;const el=e.currentTarget, board=$('board');const rect=board.getBoundingClientRect();const pos=boardPositions[id]||defaultPos(id);draggingOutfit={id,el,x:e.clientX,y:e.clientY,startX:pos.x,startY:pos.y,w:rect.width,h:rect.height};el.classList.add('dragging');el.setPointerCapture(e.pointerId)}
-function boardPointerMove(e){if(!draggingOutfit)return;const d=draggingOutfit;const x=Math.min(100-d.el.offsetWidth/d.w*100,Math.max(0,d.startX+(e.clientX-d.x)/d.w*100));const y=Math.min(100-d.el.offsetHeight/d.h*100,Math.max(0,d.startY+(e.clientY-d.y)/d.h*100));d.el.style.left=x+'%';d.el.style.top=y+'%';boardPositions[d.id]={x,y}}
+function defaultPos(id){return boardManualPositions[id]||currentAutoPositions[id]||{x:2,y:3}}
+function boardPointerDown(e,id){if(e.target.closest('button'))return;const el=e.currentTarget, board=$('board');const rect=board.getBoundingClientRect();const pos=boardManualPositions[id]||defaultPos(id);draggingOutfit={id,el,x:e.clientX,y:e.clientY,startX:pos.x,startY:pos.y,w:rect.width,h:rect.height};el.classList.add('dragging');el.setPointerCapture(e.pointerId)}
+function boardPointerMove(e){if(!draggingOutfit)return;const d=draggingOutfit;const x=Math.min(100-d.el.offsetWidth/d.w*100,Math.max(0,d.startX+(e.clientX-d.x)/d.w*100));const y=Math.min(100-d.el.offsetHeight/d.h*100,Math.max(0,d.startY+(e.clientY-d.y)/d.h*100));d.el.style.left=x+'%';d.el.style.top=y+'%';boardManualPositions[d.id]={x,y};boardPositions[d.id]={x,y}}
 function boardPointerUp(){if(!draggingOutfit)return;draggingOutfit.el.classList.remove('dragging');draggingOutfit=null}
-function removeBoardItem(id){slots=slots.map(x=>x===id?null:x);delete boardPositions[id];renderBoard()}
+function removeBoardItem(id){slots=slots.map(x=>x===id?null:x);delete boardPositions[id];delete boardManualPositions[id];renderBoard()}
 function addToBoard(){slotIndex=slots.findIndex(x=>!x);if(slotIndex<0){slotIndex=slots.length;slots.push(null)}chooseSlot(slotIndex)}
 $('board').addEventListener('pointermove',boardPointerMove);$('board').addEventListener('pointerup',boardPointerUp);$('board').addEventListener('pointercancel',boardPointerUp);
 function applyNumbers(){
@@ -623,22 +665,19 @@ function applyNumbers(){
  const oldIds=[...new Set(slots.filter(Boolean))];
  const unchanged=oldIds.length===found.length&&oldIds.every(id=>found.includes(id));
  if(!unchanged){
-  // For new combinations only: keep locations of the garments that remain.
-  // Changed items receive their default category-based positions.
-  for(const id of oldIds){
-   if(found.includes(id)&&!boardPositions[id]&&currentAutoPositions[id])boardPositions[id]={...currentAutoPositions[id]};
-  }
-  boardPositions=Object.fromEntries(Object.entries(boardPositions).filter(([id])=>found.includes(id)));
+  // Keep only manual drag positions for items that remain on the board.
+  boardManualPositions=Object.fromEntries(Object.entries(boardManualPositions).filter(([id])=>found.includes(id)));
+  boardPositions={};
   slots=found;
   renderBoard();
  }
  $('numberFeedback').textContent=missing.length?'找不到編號：'+missing.join('、'):`已加入 ${found.length} 件單品`;
  notify(unchanged?'穿搭已在白板上，原有位置保留':'已叫出平面搭配');
 }
-function chooseSlot(i){slotIndex=i;$('choices').innerHTML=clothes.map(c=>`<div class="item" onclick="setSlot('${c.id}')"><img src="${c.img}"><span class="number">#${c.no}</span><div class="info"><strong>${esc(c.name)}</strong></div></div>`).join('');$('chooser').classList.add('show')}function closeChooser(){$('chooser').classList.remove('show')}function setSlot(id){if(slots.includes(id)){closeChooser();return notify('這件已在畫布上')}for(const oldId of slots.filter(Boolean)){if(!boardPositions[oldId]&&currentAutoPositions[oldId])boardPositions[oldId]={...currentAutoPositions[oldId]}}slots[slotIndex]=id;closeChooser();renderBoard()}function clearSlots(){slots=[];boardPositions={};$('numberEntry').value='';$('numberFeedback').textContent='';renderBoard()}
-async function saveLook(){const ids=slots.filter(Boolean);if(!ids.length)return notify('請先加入衣服');const name=$('lookName').value.trim()||'我的穿搭',memo=$('lookMemo').value.trim(),date=$('lookDate').value;await put('looks',{id:crypto.randomUUID(),ids,name,memo,date,positions:Object.fromEntries(ids.filter(id=>boardPositions[id]).map(id=>[id,boardPositions[id]])),background:{enabled:boardBgEnabled,strength:boardBgStrength},created:Date.now()});$('lookName').value='';$('lookMemo').value='';await refresh();notify('穿搭及日記已儲存')}
+function chooseSlot(i){slotIndex=i;$('choices').innerHTML=clothes.map(c=>`<div class="item" onclick="setSlot('${c.id}')"><img src="${c.img}"><span class="number">#${c.no}</span><div class="info"><strong>${esc(c.name)}</strong></div></div>`).join('');$('chooser').classList.add('show')}function closeChooser(){$('chooser').classList.remove('show')}function setSlot(id){if(slots.includes(id)){closeChooser();return notify('這件已在畫布上')}slots[slotIndex]=id;closeChooser();renderBoard()}function clearSlots(){slots=[];boardPositions={};boardManualPositions={};$('numberEntry').value='';$('numberFeedback').textContent='';renderBoard()}
+async function saveLook(){const ids=slots.filter(Boolean);if(!ids.length)return notify('請先加入衣服');const name=$('lookName').value.trim()||'我的穿搭',memo=$('lookMemo').value.trim(),date=$('lookDate').value;await put('looks',{id:crypto.randomUUID(),ids,name,memo,date,positions:Object.fromEntries(ids.filter(id=>boardManualPositions[id]).map(id=>[id,boardManualPositions[id]])),background:{enabled:boardBgEnabled,strength:boardBgStrength},created:Date.now()});$('lookName').value='';$('lookMemo').value='';await refresh();notify('穿搭及日記已儲存')}
 function renderLooks(){$('lookList').innerHTML=looks.length?looks.slice().sort((a,b)=>(b.created||0)-(a.created||0)).map(l=>`<div class="card"><div class="row"><strong>${esc(l.name)}</strong><button class="btn light" onclick="loadLook('${l.id}')">打開</button></div><div class="mini">${esc(l.date||'未設定日期')}</div><div class="actions" style="margin:10px 0">${(l.ids||[]).map(id=>{const c=clothes.find(x=>x.id===id);return c?`<div style="text-align:center"><img src="${c.img}" style="width:64px;height:78px;object-fit:contain;border-radius:7px;background:#f6f3ef"><div class="number">#${c.no}</div></div>`:''}).join('')}</div><p class="hint">${esc(l.memo||'')}</p><div class="actions"><button class="btn light" onclick="editLook('${l.id}')">編輯日記</button><button class="btn danger" onclick="deleteLook('${l.id}')">刪除穿搭</button></div></div>`).join(''):'<div class="empty">還沒有儲存穿搭。先到穿搭頁輸入編號吧。</div>'}
-function loadLook(id){const l=looks.find(x=>x.id===id);if(!l)return;slots=(l.ids||[]).slice();boardPositions={...(l.positions||{})};if(l.background){boardBgEnabled=l.background.enabled!==false;boardBgStrength=Math.max(8,Math.min(52,l.background.strength||22));persistBoardBackground()}$('numberEntry').value=slots.map(id=>clothes.find(x=>x.id===id)?.no||'').filter(Boolean).join(' + ');$('lookName').value=l.name;$('lookMemo').value=l.memo||'';$('lookDate').value=l.date||'';go('stylist')}
+function loadLook(id){const l=looks.find(x=>x.id===id);if(!l)return;slots=(l.ids||[]).slice();boardManualPositions={...(l.positions||{})};boardPositions={...boardManualPositions};if(l.background){boardBgEnabled=l.background.enabled!==false;boardBgStrength=Math.max(8,Math.min(52,l.background.strength||22));persistBoardBackground()}$('numberEntry').value=slots.map(id=>clothes.find(x=>x.id===id)?.no||'').filter(Boolean).join(' + ');$('lookName').value=l.name;$('lookMemo').value=l.memo||'';$('lookDate').value=l.date||'';go('stylist')}
 async function editLook(id){const l=looks.find(x=>x.id===id);if(!l)return;const name=prompt('穿搭名稱',l.name);if(name===null)return;const memo=prompt('小備註／穿搭日記',l.memo||'');if(memo===null)return;l.name=name.trim()||l.name;l.memo=memo;await put('looks',l);await refresh()}
 async function deleteLook(id){if(!await askConfirm('確定刪除這套穿搭及日記？衣服本身不受影響。','刪除穿搭'))return;await del('looks',id);await refresh()}
 async function importPublishedCloset(){
