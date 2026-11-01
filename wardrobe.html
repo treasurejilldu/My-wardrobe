@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f7f4ef"><title>MY WARDROBE · V4.20</title><style>
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f7f4ef"><title>MY WARDROBE · V4.21</title><style>
 :root{--bg:#f7f4ef;--card:#fff;--ink:#352f2b;--muted:#8b827b;--accent:#75675d;--line:#e4ddd4;--chip:#ede7df}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC",Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}main{max-width:780px;margin:auto;padding:18px 16px 110px}header{padding:25px 16px 14px;text-align:center}header small{font-size:10px;letter-spacing:2px;color:var(--muted)}header h1{margin:8px 0;font-size:25px;letter-spacing:1.5px}.sub,.hint{color:var(--muted);font-size:12px;line-height:1.65}.tab{display:none}.tab.active{display:block}.row{display:flex;align-items:center;justify-content:space-between;gap:8px}.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.btn{padding:10px 13px;border:0;border-radius:11px;background:var(--accent);color:#fff;font-weight:600;font-size:13px}.btn.light{background:var(--chip);color:var(--ink)}.btn.outline{background:#fff;color:var(--ink);border:1px solid var(--line)}.btn.danger{background:#aa4844}.btn:disabled{opacity:.5}.card{background:var(--card);padding:16px;border-radius:17px;margin:12px 0;border:1px solid #efe9e3}h2{font-size:19px;margin:10px 0 13px}h3{font-size:15px}.pills{display:flex;gap:7px;overflow:auto;padding:6px 0 12px}.pill{border-radius:50px;border:1px solid var(--line);background:#fff;padding:8px 13px;white-space:nowrap;font-size:12px}.pill.on{background:var(--accent);color:white}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.item{position:relative;background:white;border:1px solid #eee7e0;border-radius:14px;overflow:hidden}.item img{display:block;width:100%;height:190px;object-fit:contain;background:#f5f3ef}.info{padding:9px 10px}.info strong{font-size:12px;display:block;line-height:1.5;overflow-wrap:anywhere}.info small{color:var(--muted);font-size:11px;display:block;margin-top:4px}.number{display:inline-flex;background:#403a34;color:white;border-radius:7px;padding:4px 7px;font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}.item .number{position:absolute;top:8px;left:8px}.item.selected{outline:3px solid var(--accent)}.item .pick{position:absolute;top:7px;right:7px;width:28px;height:28px;accent-color:var(--accent)}input[type=text],input[type=number],select,textarea{width:100%;border:1px solid var(--line);border-radius:11px;background:#fff;padding:12px;color:var(--ink);min-width:0}label{font-size:12px;color:#635a53;display:block;margin:13px 0 5px}.mini{font-size:12px;color:var(--muted)}.empty{padding:30px 10px;text-align:center;color:var(--muted);background:white;border-radius:13px;border:1px dashed var(--line)}nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:center;gap:0;background:#fff;box-shadow:0 -2px 20px #0001;padding:10px 0 calc(10px + env(safe-area-inset-bottom));z-index:8}nav button{width:25%;max-width:180px;background:transparent;border:0;color:#938b83;font-size:12px;padding:8px 0}nav button.on{color:#53483f;font-weight:800}nav b{display:block;font-size:20px;padding-bottom:3px}.sheet-cover{position:fixed;inset:0;background:#201a17aa;z-index:12;display:none;align-items:flex-end;justify-content:center}.sheet-cover.show{display:flex}.sheet{background:var(--bg);border-radius:22px 22px 0 0;max-height:94dvh;overflow:auto;width:min(780px,100%);padding:20px 18px 35px}.preview{max-width:100%;max-height:260px;object-fit:contain;display:block;margin:auto;background:white;border-radius:12px}.slots{display:grid;grid-template-columns:1fr 1fr;gap:10px}.slot{background:#fff;border:1px dashed #cfc6bc;border-radius:14px;min-height:155px;text-align:center;padding:10px;cursor:pointer}.slot img{width:100%;height:125px;object-fit:contain}.slot .mini{font-size:11px}.look{display:flex;gap:12px}.look img{width:63px;height:80px;object-fit:contain;border-radius:8px;background:#f6f3ef}.toast{position:fixed;bottom:95px;left:50%;transform:translateX(-50%);padding:12px 18px;background:#342b25;color:white;border-radius:30px;font-size:12px;z-index:50;display:none;max-width:90vw;text-align:center} .hidden{display:none!important}.status{font-size:12px;color:#746b62;margin:8px 0}.badge{border-radius:7px;padding:4px 7px;background:var(--chip);font-size:11px} .splitbox{padding:10px;background:#fff;border-radius:12px;border:1px solid var(--line)}.splitbox img{max-width:100%;height:110px;object-fit:contain} .footer{font-size:11px;color:#8f857a;margin-top:20px;line-height:1.7}
  .confirm-mask{position:fixed;inset:0;background:#211b18a8;z-index:100;display:none;align-items:center;justify-content:center;padding:20px}.confirm-mask.show{display:flex}.confirm-box{background:#fff;border-radius:18px;padding:23px;width:min(420px,100%);box-shadow:0 12px 45px #0003}.confirm-box h3{margin:0 0 10px;font-size:18px}.confirm-box p{font-size:14px;line-height:1.7;color:#655b53}.confirm-box .actions{justify-content:flex-end;margin-top:18px}
 
@@ -64,6 +64,25 @@ nav button svg{display:block;width:19px;height:19px;flex:none}
 
 /* V4.10 · legible full-size garments within a single phone board */
 .outfit-card img{filter:drop-shadow(0 2px 2px rgba(68,50,40,.1))}
+
+/* V4.24 — daily and trip planner */
+.ask-mode-toggle{display:flex;gap:8px;margin:10px 0 4px}.ask-mode-toggle .btn{flex:1;padding:11px 5px}
+/* V4.21 — Ask 親辜, compact fifth navigation tab */
+.ask-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.ask-grid label{margin-top:10px}
+.ask-field{min-width:0}
+.ask-field-wide{grid-column:1/-1}
+.ask-options{display:flex;flex-wrap:wrap;gap:9px;margin:12px 0}
+.ask-options label{display:flex;align-items:center;gap:5px;margin:0;color:#594436}
+.ask-options input{accent-color:#625044}
+.ask-preview{height:190px;resize:vertical;font-size:12px;line-height:1.65;white-space:pre-wrap}
+.ask-attachment-list{font-size:12px;line-height:1.7;color:#75685d;margin:7px 0}
+.ask-helper{font-size:11px;line-height:1.55;color:#7c726a}
+.ask-result-row{background:#f7f2eb;border:1px solid #e4d9cc;border-radius:9px;padding:10px;margin-top:8px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ask-result-row strong{font-size:13px;overflow-wrap:anywhere}
+nav button{min-width:0;width:20%;font-size:10px}
+nav button b{height:19px}
+@media(max-width:370px){nav button{font-size:9px}nav button svg{width:18px;height:18px}.ask-grid{column-gap:8px}}
 </style></head><body>
 <header><h1>MY WARDROBE</h1></header><main>
 <section class="tab active" id="closet"><div class="row"><h2>我的衣櫃 <span id="total" class="mini"></span></h2><button class="btn" onclick="document.getElementById('upload').click()">＋ 上傳</button></div><input id="upload" type="file" multiple accept="image/*" class="hidden" onchange="uploadFiles(this.files);this.value=''">
@@ -73,8 +92,23 @@ nav button svg{display:block;width:19px;height:19px;flex:none}
 <div class="grid" id="items"></div></section>
 <section class="tab" id="stylist"><div class="row"><h2>穿搭拼貼</h2><button class="btn light" onclick="clearSlots()">清空</button></div><div class="card"><label>衣物編號</label><div class="actions"><input type="text" style="flex:1" id="numberEntry" placeholder="例如 12 + 8 + 23" inputmode="text"><button class="btn" onclick="applyNumbers()">叫出穿搭</button></div><div id="numberFeedback" class="mini" style="margin-top:6px"></div></div><div class="outfit-settings"><button type="button" class="btn light" id="bgModeBtn" onclick="toggleBoardBackground()">白底去背：開</button><label for="bgStrength">去背強度 <span id="bgStrengthValue">22</span></label><input id="bgStrength" type="range" min="8" max="52" step="2" value="22" oninput="setBoardStrength(this.value)" aria-label="白底去背強度"></div><div class="board-wrap"><div id="board" class="outfit-canvas" aria-label="可拖移的暖燕麥色錯位穿搭畫布"></div><button type="button" class="board-add" onclick="addToBoard()" aria-label="加入衣物">＋ 加入</button></div><div class="card"><label>這套穿搭的名稱</label><input id="lookName" type="text" placeholder="例如：週末咖啡散步"><label>小備註／穿搭日記</label><textarea id="lookMemo" rows="3" placeholder="今天穿這套去哪裡、感覺如何…"></textarea><label>穿搭日期（選填）</label><input type="date" id="lookDate" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:10px"><button style="width:100%;margin-top:14px" class="btn" onclick="saveLook()">儲存這套穿搭</button></div></section>
 <section class="tab" id="looks"><h2>我的收藏</h2><div id="lookList"></div></section>
-<section class="tab" id="share"><h2>分享衣櫃給 ChatGPT</h2><div class="card"><strong>生成可分享的衣櫃網頁</strong><p class="hint">下載 closet.html → 上傳 GitHub → 分享公開網址。</p><button class="btn" onclick="exportPublicCloset()">產生公開衣櫃 closet.html</button><div id="shareExportPanel" class="hidden" style="margin-top:14px"><div class="actions"><button class="btn" onclick="shareClosetFile()">用 iPhone 分享檔案</button><button class="btn light" onclick="copyClosetHTML()">複製 HTML</button><button class="btn light" onclick="downloadClosetFallback()">再試下載</button></div><p class="mini">如果無法分享，點「複製 HTML」再貼進可儲存 .html 的文字編輯器。不要把 121 件衣服的原始 HTML 直接貼到公開訊息。</p><textarea id="closetHTMLExport" readonly style="width:100%;height:105px;font-size:12px;display:none" aria-label="公開衣櫃 HTML"></textarea></div><p class="mini">公開頁面包含衣服照片與名稱，不包含私人日記。</p></div><div class="card"><strong>從公開衣櫃帶入衣服</strong><p class="mini">已將 closet.html 放在 GitHub 同一資料夾？按下即可載入照片、名稱、分類與編號。既有單品不會自動刪除。</p><button class="btn" id="importClosetButton" onclick="importPublishedCloset()">從 closet.html 匯入衣櫃</button><p class="mini" id="closetImportStatus" aria-live="polite"></p></div><div class="card"><strong>備份或搬家</strong><div class="actions"><button class="btn light" onclick="backup()">下載完整備份</button><button class="btn light" onclick="document.getElementById('import').click()">匯入備份</button><input id="import" class="hidden" type="file" accept="application/json" onchange="importBackup(this.files[0]);this.value=''"></div></div></section>
-</main><nav><button data-go="closet" class="on" onclick="go('closet')"><b><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M9 4v17M15 4v17M5.5 8h1M11.5 8h1M17.5 8h1"/></svg></b>衣櫃</button><button data-go="stylist" onclick="go('stylist')"><b><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M3 12h18"/><path d="M5 5l14 14M19 5L5 19"/></svg></b>穿搭</button><button data-go="looks" onclick="go('looks')"><b><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg></b>收藏</button><button data-go="share" onclick="go('share')"><b><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M12 15V3m-4 4 4-4 4 4"/></svg></b>分享</button></nav>
+<section class="tab" id="share"><h2>分享衣櫃給 ChatGPT</h2><div class="card"><strong>同步公開衣櫃（手動上傳 GitHub）</strong><p class="hint">一次準備 closet.html 與 wardrobe-data.json；iPhone 分享時僅包含檔案，不附加文字。儲存後請將兩個檔案上傳 GitHub 並提交。</p><button type="button" class="btn" onclick="syncPublicCloset()">同步公開衣櫃・分享更新檔</button></div><div class="card"><strong>生成可分享的衣櫃網頁</strong><p class="hint">下載 closet.html → 上傳 GitHub → 分享公開網址。</p><button class="btn" onclick="exportPublicCloset()">產生公開衣櫃 closet.html</button><div id="shareExportPanel" class="hidden" style="margin-top:14px"><div class="actions"><button class="btn" onclick="shareClosetFile()">用 iPhone 分享檔案</button><button class="btn light" onclick="copyClosetHTML()">複製 HTML</button><button class="btn light" onclick="downloadClosetFallback()">再試下載</button></div><p class="mini">如果無法分享，點「複製 HTML」再貼進可儲存 .html 的文字編輯器。不要把 121 件衣服的原始 HTML 直接貼到公開訊息。</p><textarea id="closetHTMLExport" readonly style="width:100%;height:105px;font-size:12px;display:none" aria-label="公開衣櫃 HTML"></textarea></div><p class="mini">公開頁面包含衣服照片與名稱，不包含私人日記。</p></div><div class="card"><strong>從公開衣櫃帶入衣服</strong><p class="mini">已將 closet.html 放在 GitHub 同一資料夾？按下即可載入照片、名稱、分類與編號。既有單品不會自動刪除。</p><button class="btn" id="importClosetButton" onclick="importPublishedCloset()">從 closet.html 匯入衣櫃</button><p class="mini" id="closetImportStatus" aria-live="polite"></p></div><div class="card"><strong>備份或搬家</strong><div class="actions"><button class="btn light" onclick="backup()">下載完整備份</button><button class="btn light" onclick="document.getElementById('import').click()">匯入備份</button><input id="import" class="hidden" type="file" accept="application/json" onchange="importBackup(this.files[0]);this.value=''"></div></div></section>
+<section class="tab" id="ask"><h2>問親辜 <span aria-hidden="true">♡</span></h2>
+<div class="card"><div class="ask-grid">
+<div class="ask-field ask-field-wide"><strong>詢問方式</strong><div class="ask-mode-toggle"><button type="button" id="askModeDaily" class="btn" onclick="setAskMode('daily')">每日詢問</button><button type="button" id="askModeTrip" class="btn light" onclick="setAskMode('trip')">旅程詢問</button></div><p class="ask-helper" id="askModeHelp">逐日填寫日期、地點與活動，可新增多筆。</p></div>
+<div id="askDailySection" class="ask-field ask-field-wide"><strong>每日行程</strong><div id="askDays"></div><button type="button" class="btn light" style="margin:9px 0 4px" onclick="addAskDay()">＋ 新增一天</button></div>
+<div id="askTripSection" class="ask-field ask-field-wide" style="display:none"><strong>旅程資料</strong><p class="ask-helper">只填一次，讓親辜依整段旅程逐天規劃。每一天仍分開提供可複製的編號組合。</p><div class="ask-grid"><div class="ask-field"><label for="askTripStart">出發日期</label><input type="date" id="askTripStart"></div><div class="ask-field"><label for="askTripEnd">結束日期</label><input type="date" id="askTripEnd"></div><div class="ask-field ask-field-wide"><label for="askTripPlaceMode">旅程地點</label><select id="askTripPlaceMode" onchange="syncAskTripModes()"><option value="manual">手動填寫</option><option value="attachment">詳附件</option></select><div id="askTripPlaceManual"><input type="text" id="askTripPlace" placeholder="例如：紐西蘭南島（皇后鎮、瓦納卡、庫克山）"></div><p id="askTripPlaceHint" class="ask-helper" style="display:none">請在 ChatGPT 附上包含目的地的檔案或圖片。</p></div><div class="ask-field ask-field-wide"><label for="askTripActivityMode">旅程活動／行程</label><select id="askTripActivityMode" onchange="syncAskTripModes()"><option value="manual">手動填寫</option><option value="attachment">詳附件</option></select><div id="askTripActivityManual"><textarea id="askTripActivities" rows="3" placeholder="例如：城市散步、健行、湖邊拍照；可按日期分行簡述"></textarea></div><p id="askTripActivityHint" class="ask-helper" style="display:none">請在 ChatGPT 附上詳細行程表、PDF 或照片。</p></div></div></div>
+<div class="ask-field ask-field-wide"><label for="askNeeds">穿搭需求</label><textarea id="askNeeds" rows="2" placeholder="例如：保暖、防風、拍照、好走路；想穿 #23 + #79"></textarea></div>
+<div class="ask-field"><label for="askSets">推薦套數</label><select id="askSets"><option value="3">3 套</option><option value="2">2 套</option><option value="1">1 套</option></select></div>
+<div class="ask-field"><label for="askClosetUrl">公開衣櫃網址</label><input id="askClosetUrl" type="text" value="https://treasurejilldu.github.io/My-wardrobe/closet.html"></div>
+
+</div>
+<div class="ask-options"><label><input type="checkbox" id="askWeather" checked> 查當地天氣</label><label><input type="checkbox" id="askLayers" checked> 提醒保暖／防雨</label></div>
+<div class="actions"><button type="button" class="btn" onclick="generateAskPrompt()">產生詢問模板</button><button type="button" class="btn light" onclick="copyAskPrompt()">複製模板</button></div>
+<textarea class="ask-preview" id="askPrompt" aria-label="詢問模板預覽" placeholder="按「產生詢問模板」後，在這裡預覽及修改文字"></textarea>
+</div>
+<div class="card"><strong>把親辜推薦帶回穿搭白板</strong><p class="ask-helper">在聊天室複製任一組編號，例如 7 + 23 + 83 + 79；也可以貼上整段包含多組編號的回答，再選擇要叫出的那一套。</p><textarea id="askAnswer" rows="3" placeholder="貼上 7 + 23 + 83 + 79，或貼上含多組編號的回答" oninput="parseAskLooks()"></textarea><div class="actions" style="margin-top:9px"><button class="btn light" type="button" onclick="pasteAskAnswer()">貼上剪貼簿</button><button class="btn light" type="button" onclick="parseAskLooks()">辨識編號組合</button></div><div id="askDetected" aria-live="polite"></div></div></section>
+</main><nav><button data-go="closet" class="on" onclick="go('closet')"><b><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M9 4v17M15 4v17M5.5 8h1M11.5 8h1M17.5 8h1"/></svg></b>衣櫃</button><button data-go="stylist" onclick="go('stylist')"><b><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M3 12h18"/><path d="M5 5l14 14M19 5L5 19"/></svg></b>穿搭</button><button data-go="looks" onclick="go('looks')"><b><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg></b>收藏</button><button data-go="share" onclick="go('share')"><b><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M12 15V3m-4 4 4-4 4 4"/></svg></b>分享</button><button data-go="ask" onclick="go('ask')"><b><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H7l-4 2v-5.5a7.5 7.5 0 1 1 17-4z"/><path d="M8 10h8M8 14h5"/></svg></b>問親辜</button></nav>
 <button id="backTop" aria-label="回到頂端" title="回到頂端" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button><div class="confirm-mask" id="confirmLayer" role="dialog" aria-modal="true" aria-labelledby="confirmTitle"><div class="confirm-box"><h3 id="confirmTitle">確定刪除？</h3><p id="confirmMessage"></p><div class="actions"><button type="button" class="btn light" id="confirmCancel">取消</button><button type="button" class="btn danger" id="confirmAccept">確定刪除</button></div></div></div>
 <div class="sheet-cover" id="editorLayer" onclick="if(event.target===this)closeEditor()"><div class="sheet"><div class="row"><h2>編輯單品 <span id="editNo" class="number"></span></h2><button class="btn light" onclick="closeEditor()">關閉 ✕</button></div><img class="preview" id="editImg"><div class="actions" style="margin:10px 0"><button class="btn light" onclick="openCrop('replace')">✂ 修正截圖</button><button class="btn light" onclick="openCrop('add')">＋ 補入單品</button></div><label>更換照片</label><input type="file" id="replace" accept="image/*" onchange="replaceImg(this.files[0]);this.value=''" style="width:100%"><label>名稱</label><input id="editName" type="text"><label>分類</label><select id="editCat"></select><label>品牌（選填）</label><input id="editBrand" type="text"><label>材質（選填）</label><input id="editMat" type="text"><label>備註</label><textarea id="editMemo" rows="2"></textarea><div class="actions" style="margin-top:16px"><button class="btn" onclick="saveEdit()">儲存修改</button><button class="btn danger" onclick="deleteItem()">刪除單品</button></div></div></div>
 <div class="sheet-cover" id="cropLayer" onclick="if(event.target===this)closeCrop()"><div class="sheet"><div class="row"><h2 id="cropTitle">從原圖框選</h2><button class="btn light" onclick="closeCrop()">關閉</button></div><p class="hint">框選衣服範圍，不含下方文字。</p><div id="cropWrap" style="position:relative;touch-action:none;user-select:none;background:#fff;border:1px solid var(--line);margin:14px 0"><img id="cropOriginal" style="display:block;width:100%;height:auto;pointer-events:none"><div id="cropRect" style="display:none;position:absolute;border:2px solid #617761;background:#71887430;pointer-events:none"></div></div><button class="btn" id="cropSaveBtn" onclick="saveCrop()">儲存框選</button></div></div><div class="sheet-cover" id="chooser" onclick="if(event.target===this)closeChooser()"><div class="sheet"><div class="row"><h2>選擇衣服</h2><button class="btn light" onclick="closeChooser()">關閉</button></div><div id="choices" class="grid"></div></div></div><div id="toast" class="toast"></div>
@@ -571,14 +605,22 @@ async function importPublishedCloset(){
  }catch(e){status.textContent='匯入失敗：'+e.message;notify('匯入失敗，原衣櫃未刪除');}
  finally{btn.disabled=false}
 }
-function backup(){download('my-wardrobe-backup.json',JSON.stringify({version:3,clothes,looks,nextNo:localStorage.getItem('wardrobe_next_no')},null,2),'application/json')}
+async function backup(){
+ const content=JSON.stringify({version:3,clothes,looks,nextNo:localStorage.getItem('wardrobe_next_no')},null,2);
+ const file=new File([content],'my-wardrobe-backup.json',{type:'application/json'});
+ try{
+  if(!navigator.share||!navigator.canShare||!navigator.canShare({files:[file]}))throw Error('不支援直接分享');
+  // Only share the actual file: an added title/text turns into 文字.txt in iOS Files.
+  await navigator.share({files:[file]});
+ }catch(e){if(e.name==='AbortError')return;download('my-wardrobe-backup.json',content,'application/json');notify('已改用下載備份檔案')}
+}
 async function importBackup(f){if(!f)return;try{const data=JSON.parse(await f.text());if(!Array.isArray(data.clothes))throw Error('格式不符');if(!await askConfirm(`匯入 ${data.clothes.length} 件衣服？相同 ID 會更新。`,'匯入備份'))return;for(const c of data.clothes)await put('clothes',c);for(const l of data.looks||[])await put('looks',l);const newMax=Math.max(0,...data.clothes.map(x=>Number(x.no)||0));localStorage.setItem('wardrobe_next_no',String(Math.max(Number(localStorage.getItem('wardrobe_next_no'))||1,newMax+1,Number(data.nextNo)||1)));await refresh();notify('備份已匯入')}catch(e){notify('備份匯入失敗：'+e.message)}}
 async function shareClosetFile(){
  if(!window.currentClosetHTML)return notify('請先產生衣櫃');
  try{
   const file=new File([window.currentClosetHTML],'closet.html',{type:'text/html'});
   if(!navigator.share || !navigator.canShare || !navigator.canShare({files:[file]}))throw new Error('此瀏覽器不支援 HTML 檔案分享');
-  await navigator.share({files:[file],title:'MY WARDROBE 公開衣櫃'});
+  await navigator.share({files:[file]});
  }catch(e){if(e.name==='AbortError')return;notify('無法直接分享：'+e.message+'，可改用「複製 HTML」')}
 }
 async function copyClosetHTML(){
@@ -588,6 +630,22 @@ async function copyClosetHTML(){
  catch(e){el.focus();el.select();notify('已選取 HTML：請長按選擇「拷貝」；若無法複製請用 Safari 開啟檔案後再試')}
 }
 function downloadClosetFallback(){if(!window.currentClosetHTML)return notify('請先產生衣櫃');download('closet.html',window.currentClosetHTML)}
+async function syncPublicCloset(){
+ if(!clothes.length)return notify('衣櫃還沒有衣服');
+ exportPublicCloset();
+ const html=window.currentClosetHTML;
+ const index=JSON.stringify({version:1,updatedAt:new Date().toISOString(),count:clothes.length,clothes:clothes.map(c=>({no:c.no,name:c.name||'',category:c.category||'未分類',brand:c.brand||'',material:c.material||'',memo:c.memo||''}))},null,2);
+ const files=[new File([html],'closet.html',{type:'text/html'}),new File([index],'wardrobe-data.json',{type:'application/json'})];
+ try{
+  if(!navigator.share||!navigator.canShare||!navigator.canShare({files}))throw Error('此裝置無法一次分享兩份檔案');
+  await navigator.share({files});
+ }catch(e){
+  if(e.name==='AbortError')return;
+  download('closet.html',html);
+  download('wardrobe-data.json',index,'application/json');
+  notify('已改用分別下載兩份檔案；請確認都已儲存');
+ }
+}
 function exportPublicCloset(){if(!clothes.length)return notify('衣櫃還沒有衣服');const entries=clothes.map(c=>({no:c.no,name:c.name,category:c.category,brand:c.brand||'',material:c.material||'',img:c.img}));const payload=JSON.stringify(entries).replace(/</g,'\\u003c');const html=`<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MY WARDROBE 公開衣櫃</title><style>body{font-family:Arial,sans-serif;background:#f8f6f2;color:#37312b;max-width:960px;margin:auto;padding:20px}h1{text-align:center}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}.item{background:white;border:1px solid #ddd;border-radius:12px;overflow:hidden}.item img{width:100%;height:190px;object-fit:contain}.info{padding:10px}.num{background:#3a3530;color:white;border-radius:6px;padding:3px 7px;font-weight:bold}.name{font-weight:bold;margin:9px 0 3px;overflow-wrap:anywhere}small{color:#756b62}p{line-height:1.6} .confirm-mask{position:fixed;inset:0;background:#211b18a8;z-index:100;display:none;align-items:center;justify-content:center;padding:20px}.confirm-mask.show{display:flex}.confirm-box{background:#fff;border-radius:18px;padding:23px;width:min(420px,100%);box-shadow:0 12px 45px #0003}.confirm-box h3{margin:0 0 10px;font-size:18px}.confirm-box p{font-size:14px;line-height:1.7;color:#655b53}.confirm-box .actions{justify-content:flex-end;margin-top:18px}
 
 /* V3.7 · warm coffee editorial navigation and category labels */
@@ -604,4 +662,136 @@ button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-vis
 /* V4.2: compact clear-search control */
 .search-wrap{position:relative;margin:0}.search-wrap #search{padding-right:45px}.search-clear{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:#eee8e0;color:#604d3f;border-radius:50%;height:29px;width:29px;font-size:19px;line-height:1;display:none;align-items:center;justify-content:center}.search-clear.show{display:flex}
 </style></head><body><h1>MY WARDROBE</h1><p>我的公開衣櫃｜分享給 ChatGPT 時，請用各件衣服的目前編號推薦穿搭；刪除後編號會遞補。</p><div id="list" class="grid"></div><script id="wardrobe-data" type="application/json">${payload}</scr`+`ipt><script>const items=JSON.parse(document.getElementById('wardrobe-data').textContent);const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));document.getElementById('list').innerHTML=items.map(c=>'<article class="item"><img src="'+c.img+'"><div class="info"><span class="num">#'+c.no+'</span><div class="name">'+esc(c.name)+'</div><small>'+esc(c.category)+' · '+esc(c.material)+'</small></div></article>').join('')<\/script></body></html>`;window.currentClosetHTML=html;document.getElementById('closetHTMLExport').value=html;document.getElementById('shareExportPanel').classList.remove('hidden');notify('已產生衣櫃資料，請點「用 iPhone 分享檔案」')}
+
+// V4.21: conversational outfit workflow. This page never calls any AI API.
+// V4.23: multiple independent days, with the attachment reminder per day.
+let askDays=[];
+let askMode='daily';
+function setAskMode(mode){
+ readAskDays();askMode=mode==='trip'?'trip':'daily';
+ $('askDailySection').style.display=askMode==='daily'?'':'none';
+ $('askTripSection').style.display=askMode==='trip'?'':'none';
+ $('askModeDaily').className='btn'+(askMode==='daily'?'':' light');
+ $('askModeTrip').className='btn'+(askMode==='trip'?'':' light');
+ $('askModeHelp').textContent=askMode==='daily'?'逐日填寫日期、地點與活動，可新增多筆。':'輸入旅程起迄日期，地點與活動可選手動填寫或詳附件。';
+}
+function syncAskTripModes(){
+ for(const [kind] of [['Place'],['Activity']]){
+  const attached=$('askTrip'+kind+'Mode').value==='attachment';
+  $('askTrip'+kind+'Manual').style.display=attached?'none':'';
+  $('askTrip'+kind+'Hint').style.display=attached?'':'none';
+ }
+}
+function askTripHasAttachment(){return $('askTripPlaceMode').value==='attachment'||$('askTripActivityMode').value==='attachment'}
+function askUsesAttachment(){return askMode==='trip'?askTripHasAttachment():askDays.some(d=>d.mode==='attachment')}
+
+function makeAskDay(seed={}){return {date:seed.date||'',place:seed.place||'',mode:seed.mode||seed.activityMode||'manual',activities:seed.activities||''}}
+function readAskDays(){
+ document.querySelectorAll('#askDays .ask-day').forEach((node,i)=>{
+  if(!askDays[i])return;
+  askDays[i]={date:node.querySelector('[data-field="date"]').value,place:node.querySelector('[data-field="place"]').value,mode:node.querySelector('[data-field="mode"]').value,activities:node.querySelector('[data-field="activities"]').value};
+ });
+}
+function renderAskDays(){
+ const container=$('askDays');container.innerHTML='';
+ askDays.forEach((d,i)=>{
+  const node=document.createElement('div');node.className='ask-day';
+  node.style.cssText='border:1px solid var(--line);border-radius:13px;padding:12px;margin-top:12px;background:#faf8f5';
+  node.innerHTML=`<div class="row" style="align-items:center"><strong>第 ${i+1} 天</strong>${askDays.length>1?`<button type="button" class="btn light" data-remove style="padding:6px 10px">移除</button>`:''}</div>
+   <div class="ask-grid"><div class="ask-field"><label>日期</label><input type="date" data-field="date"></div><div class="ask-field"><label>地點</label><input type="text" data-field="place" placeholder="例如：庫克山、瓦納卡"></div>
+   <div class="ask-field ask-field-wide"><label>當日行程／活動</label><select data-field="mode"><option value="manual">手動填寫</option><option value="attachment">上傳附件</option></select><div data-manual style="margin-top:9px"><textarea data-field="activities" rows="3" placeholder="例如：上午健行、下午湖畔散步"></textarea></div><div data-attachment class="ask-helper" style="display:none;margin-top:8px">請在 ChatGPT 上傳這天的行程檔案或圖片；App 不需要選取檔案。</div></div></div>`;
+  node.querySelector('[data-field="date"]').value=d.date;
+  node.querySelector('[data-field="place"]').value=d.place;
+  node.querySelector('[data-field="mode"]').value=d.mode;
+  node.querySelector('[data-field="activities"]').value=d.activities;
+  const updateMode=()=>{const attached=node.querySelector('[data-field="mode"]').value==='attachment';node.querySelector('[data-manual]').style.display=attached?'none':'block';node.querySelector('[data-attachment]').style.display=attached?'block':'none'};
+  node.querySelector('[data-field="mode"]').addEventListener('change',updateMode);updateMode();
+  if(askDays.length>1)node.querySelector('[data-remove]').addEventListener('click',()=>{readAskDays();askDays.splice(i,1);renderAskDays()});
+  container.appendChild(node);
+ });
+}
+function addAskDay(){readAskDays();askDays.push(makeAskDay());renderAskDays()}
+function generateAskPrompt(){
+ readAskDays();
+ const needs=$('askNeeds').value.trim()||'舒適、耐走、有層次、符合每天活動';
+ const url=$('askClosetUrl').value.trim()||'請參考我另外提供的衣櫃資料';
+ const indexUrl=/\/closet\.html(?:[?#].*)?$/i.test(url)?url.replace(/closet\.html(?:[?#].*)?$/i,'wardrobe-data.json'):'';
+ const sets=$('askSets').value;
+ const attachmentMode=askUsesAttachment();
+ let header='',instructions='';
+ if(askMode==='trip'){
+  const start=$('askTripStart').value,end=$('askTripEnd').value;
+  const place=$('askTripPlaceMode').value==='attachment'?'請詳閱我在 ChatGPT 上傳的附件，辨認每日所在地點':($('askTripPlace').value.trim()||'未填寫，請先向我確認');
+  const activity=$('askTripActivityMode').value==='attachment'?'請詳閱我在 ChatGPT 上傳的附件，依實際每日行程判斷活動':($('askTripActivities').value.trim()||'未填寫，請先向我確認');
+  header=`🤎 MY WARDROBE｜旅程穿搭規劃
+旅程日期：${start||'未填'} ～ ${end||'未填'}
+旅程地點：${place}
+旅程活動／行程：${activity}`;
+  instructions=`請先依旅程日期、附件或我填寫的內容整理逐日地點與活動，再按日期順序逐天推薦，每天各 ${sets} 套搭配，並選出當日首選。若沒有足夠資訊辨別哪天做什麼，請明確標示不確定並向我確認，不要編造行程。
+請統整全程行李與重複穿搭，盡可能一衣多穿，減少不必要的行李。
+【回覆格式非常重要】請按「第 1 天／日期／地點」、「第 2 天／日期／地點」依序分段；每天的每套搭配各自單獨一行「編號：7 + 23 + 83 + 79」，不要把多天的編號合併成一組。每一套都要方便單獨複製回 App 的單日白板。`; 
+ }else{
+  const days=askDays.map((d,i)=>`第 ${i+1} 天
+日期：${d.date||'未填'}
+地點：${d.place.trim()||'未填'}
+行程／活動：${d.mode==='attachment'?'請依照我在 ChatGPT 另外上傳的附件，確認這天的行程':(d.activities.trim()||'未填寫，請先詢問我')}`).join('\n\n');
+  header=`🤎 MY WARDROBE｜每日穿搭推薦
+共 ${askDays.length} 天
+
+${days}`;
+  instructions=`請依日期逐天推薦，每天各 ${sets} 套搭配，並為每一天選出首選；考慮連續多日衣物重複搭配及行李精簡。每一天的每套搭配，最後都單獨列出可直接貼入 App 的編號組合，例如：7 + 23 + 83 + 79。請將各組編號獨立成行，方便逐套複製回 App。`;
+ }
+ const weather=$('askWeather').checked?'請查詢各天當地天氣、溫差、風雨與體感溫度；日期太遠時請用氣候參考並說明不確定性。':'優先依照提供的行程，不必額外查詢天氣。';
+ const layers=$('askLayers').checked?'並提醒各天是否需要排汗內搭、發熱衣／褲、防風防水層或備用單品。':' ';
+ const prompt=`${header}
+
+穿搭需求：${needs}
+我的公開衣櫃：${url}${indexUrl?`\n衣櫃快速索引（請先讀取）：${indexUrl}`:''}
+${attachmentMode?'📎 請參考我在 ChatGPT 另外上傳的行程檔案或照片，先確認內容再推薦。':''}
+
+${instructions}
+${weather}
+請核對衣櫃照片、英文名稱與分類；每件標明正確編號、名稱與用途，不確定就說明。
+評估舒適度、活動強度、保暖程度、色彩層次及拍照美感。${layers}
+不用生成圖片。`;
+ $('askPrompt').value=prompt;
+ try{localStorage.setItem('wardrobe-ask-fields-v424',JSON.stringify({mode:askMode,days:askDays,needs,url,sets,weather:$('askWeather').checked,layers:$('askLayers').checked,trip:{start:$('askTripStart').value,end:$('askTripEnd').value,placeMode:$('askTripPlaceMode').value,place:$('askTripPlace').value,activityMode:$('askTripActivityMode').value,activities:$('askTripActivities').value}}))}catch(e){}
+ return prompt;
+}
+async function copyAskPrompt(){
+ const t=generateAskPrompt();const remind=askUsesAttachment();
+ let copied=false;
+ try{await navigator.clipboard.writeText(t);copied=true}
+ catch(e){$('askPrompt').focus();$('askPrompt').select();try{copied=document.execCommand('copy')}catch(_){copied=false}}
+ if(copied){notify(remind?'複製成功！記得在 ChatGPT 上傳附件 📎':'複製成功！可以貼到 ChatGPT 了');if(remind)alert('複製成功！\n\n📎 記得在 ChatGPT 上傳附件（行程檔案或圖片）。')}
+ else notify('請長按模板文字選取並複製'+(remind?'，並記得上傳附件':''));
+}
+async function pasteAskAnswer(){try{$('askAnswer').value=await navigator.clipboard.readText();parseAskLooks()}catch(e){$('askAnswer').focus();notify('請長按輸入框，選「貼上」')}}
+function parseAskLooks(){
+ const source=$('askAnswer').value;
+ const matches=[...source.matchAll(/(?:#?\d{1,4}\s*\+\s*){1,11}#?\d{1,4}/g)];
+ const unique=[...new Set(matches.map(m=>m[0].replace(/#/g,'').replace(/\s*\+\s*/g,' + ').trim()))];
+ const box=$('askDetected');
+ if(!unique.length){box.innerHTML=source.trim()?'<p class="ask-helper">沒找到「7 + 23 + 79」格式的組合，請確認編號之間使用 +。</p>':'';return}
+ box.innerHTML=unique.map((combo,i)=>`<div class="ask-result-row"><strong>${i+1}. ${esc(combo)}</strong><button type="button" class="btn" onclick="applyAskCombo(${i})">叫出</button></div>`).join('');
+ window.askCombinations=unique;
+}
+function applyAskCombo(i){
+ const t=(window.askCombinations||[])[i];if(!t)return;
+ $('numberEntry').value=t;
+ go('stylist');
+ applyNumbers();
+ notify('已將編號帶入穿搭白板');
+}
+try{
+ const d=JSON.parse(localStorage.getItem('wardrobe-ask-fields-v424')||localStorage.getItem('wardrobe-ask-fields-v423')||localStorage.getItem('wardrobe-ask-fields-v421')||'null');
+ if(d){askDays=Array.isArray(d.days)&&d.days.length?d.days.map(makeAskDay):[makeAskDay(d)];
+ for(const [id,k] of [['askNeeds','needs'],['askClosetUrl','url'],['askSets','sets']]){if(d[k])$(id).value=d[k]}
+ if(typeof d.weather==='boolean')$('askWeather').checked=d.weather;
+ if(typeof d.layers==='boolean')$('askLayers').checked=d.layers;
+ if(d.trip){for(const [id,key] of [['askTripStart','start'],['askTripEnd','end'],['askTripPlaceMode','placeMode'],['askTripPlace','place'],['askTripActivityMode','activityMode'],['askTripActivities','activities']]){if(d.trip[key])$(id).value=d.trip[key]}}
+ if(d.mode==='trip')askMode='trip';
+ }
+}catch(e){}
+if(!askDays.length)askDays=[makeAskDay()];renderAskDays();setAskMode(askMode);syncAskTripModes();
 </script></body></html>
