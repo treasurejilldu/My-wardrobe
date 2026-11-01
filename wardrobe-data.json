@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-01T15:21:45.089Z",
-  "count": 121,
+  "updatedAt": "2026-11-01T16:00:31.139Z",
+  "count": 122,
   "clothes": [
     {
       "no": 1,
@@ -969,6 +969,14 @@
       "category": "褲子",
       "brand": "Uniqlo",
       "material": "聚酯纖維",
+      "memo": ""
+    },
+    {
+      "no": 122,
+      "name": "Dark Gray Zip Hoodie",
+      "category": "外套",
+      "brand": "Uniqlo",
+      "material": "棉混紡",
       "memo": ""
     }
   ]
