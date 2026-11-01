@@ -134,7 +134,7 @@ nav button b{height:19px}
 window.addEventListener('scroll',()=>{const b=document.getElementById('backTop');if(b)b.classList.toggle('show',window.scrollY>500)},{passive:true});
 const $=id=>document.getElementById(id), cats=['全部','上衣','褲子','裙子','外套','配件','未分類'], CAT=new Set(cats);let db=null,clothes=[],looks=[],reviews=[],reviewCurrent=null,filter='全部',batch=false,selected=new Set(),current=null,changedImg=null,slots=[null,null,null,null,null,null],slotIndex=0,ocrWorker=null;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));function notify(s){$('toast').textContent=s;$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',2700)}
-function askConfirm(message,title='確定刪除？'){return new Promise(resolve=>{const layer=$('confirmLayer'),yes=$('confirmAccept'),no=$('confirmCancel');$('confirmTitle').textContent=title;$('confirmMessage').textContent=message;layer.classList.add('show');const finish=answer=>{layer.classList.remove('show');yes.onclick=null;no.onclick=null;layer.onclick=null;resolve(answer)};yes.onclick=()=>finish(true);no.onclick=()=>finish(false);layer.onclick=e=>{if(e.target===layer)finish(false)}})}
+function askConfirm(message,title='確定刪除？',acceptLabel='確定刪除',cancelLabel='取消'){return new Promise(resolve=>{const layer=$('confirmLayer'),yes=$('confirmAccept'),no=$('confirmCancel');$('confirmTitle').textContent=title;$('confirmMessage').textContent=message;yes.textContent=acceptLabel;no.textContent=cancelLabel;yes.classList.toggle('danger',acceptLabel.includes('刪除'));layer.classList.add('show');const finish=answer=>{layer.classList.remove('show');yes.onclick=null;no.onclick=null;layer.onclick=null;resolve(answer)};yes.onclick=()=>finish(true);no.onclick=()=>finish(false);layer.onclick=e=>{if(e.target===layer)finish(false)}})}
 function objectStore(n,m='readonly'){return db.transaction(n,m).objectStore(n)}function all(n){return new Promise((ok,no)=>{const r=objectStore(n).getAll();r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)})}function put(n,v){return new Promise((ok,no)=>{const r=objectStore(n,'readwrite').put(v);r.onsuccess=()=>ok();r.onerror=()=>no(r.error)})}function del(n,k){return new Promise((ok,no)=>{const r=objectStore(n,'readwrite').delete(k);r.onsuccess=()=>ok();r.onerror=()=>no(r.error)})}
 function setup(){for(const c of cats.slice(1))$('editCat').add(new Option(c,c));for(const c of cats.slice(1))$('bulkCategory').add(new Option(c,c));const r=indexedDB.open('my-wardrobe-v1',2);r.onupgradeneeded=()=>{const d=r.result;for(const s of ['clothes','looks','reviews'])if(!d.objectStoreNames.contains(s))d.createObjectStore(s,{keyPath:'id'})};r.onsuccess=async()=>{db=r.result;await refresh();};r.onerror=()=>notify('無法開啟衣櫃資料庫')};setup();
 async function refresh(){clothes=await all('clothes');looks=await all('looks');reviews=await all('reviews');await assignNumbers();clothes.sort((a,b)=>a.no-b.no);render();renderBoard();renderLooks()}
@@ -146,8 +146,9 @@ async function assignNumbers(){
 }
 function nextNo(){return clothes.length+1}
 function go(id){if(batch)endBatchManagement();document.querySelectorAll('.tab').forEach(e=>e.classList.toggle('active',e.id===id));document.querySelectorAll('nav button').forEach(e=>e.classList.toggle('on',e.dataset.go===id));if(id==='stylist')renderBoard();scrollTo(0,0)}
-function visible(){const q=$('search').value.toLowerCase().trim();return clothes.filter(c=>(filter==='全部'||c.category===filter)&&(!q||[c.no,c.name,c.brand,c.material,c.category].join(' ').toLowerCase().includes(q)))}
-function render(){$('clearSearch').classList.toggle('show',Boolean($('search').value));$('total').textContent=`${clothes.length} 件`;$('filters').innerHTML=cats.map(c=>`<button class="pill ${filter===c?'on':''}" onclick="setFilter('${c}')">${c} <span class="pill-count">${c==='全部'?clothes.length:clothes.filter(x=>x.category===c).length}</span></button>`).join('')+`<button class="pill ${filter==='待拆分'?'on':''}" onclick="setFilter('待拆分')">待拆分 <span class="pill-count">${reviews.length} 張</span></button>`;const arr=filter==='待拆分'?[]:visible();$('items').innerHTML=arr.length?arr.map(c=>`<article class="item ${selected.has(c.id)?'selected':''}" onclick="${batch?`pick('${c.id}')`:`edit('${c.id}')`}"><img src="${c.img}" alt="${esc(c.name)}"><span class="number">#${c.no}</span>${batch?`<input class="pick" type="checkbox" tabindex="-1" ${selected.has(c.id)?'checked':''} onclick="event.stopPropagation();pick('${c.id}')">`:''}<div class="info"><strong>${esc(c.name||'待命名單品')}</strong><small>${esc(c.category||'未分類')}${c.brand?' · '+esc(c.brand):''}</small></div></article>`).join(''):'<div class="empty" style="grid-column:1/-1">尚無符合條件的衣服。先上傳照片吧。</div>';$('selectedCount').textContent=`已選 ${selected.size} 件`;$('items').classList.toggle('hidden',filter==='待拆分');$('reviewSection').classList.toggle('hidden',filter!=='待拆分');if(filter==='待拆分')renderReviews()}
+function visible(){const q=$('search').value.toLowerCase().trim();return clothes.filter(c=>(filter==='全部'||(filter==='最近匯入'?c.importPending===true:c.category===filter))&&(!q||[c.no,c.name,c.brand,c.material,c.category].join(' ').toLowerCase().includes(q)))}
+function render(){$('clearSearch').classList.toggle('show',Boolean($('search').value));$('total').textContent=`${clothes.length} 件`;$('filters').innerHTML=cats.map(c=>`<button class="pill ${filter===c?'on':''}" onclick="setFilter('${c}')">${c} <span class="pill-count">${c==='全部'?clothes.length:clothes.filter(x=>x.category===c).length}</span></button>`+(c==='全部'?`<button class="pill ${filter==='最近匯入'?'on':''}" onclick="setFilter('最近匯入')">最近匯入 <span class="pill-count">${clothes.filter(x=>x.importPending).length}</span></button>`:'')).join('')+`<button class="pill ${filter==='待拆分'?'on':''}" onclick="setFilter('待拆分')">待拆分 <span class="pill-count">${reviews.length} 張</span></button>`;const arr=filter==='待拆分'?[]:visible();$('items').innerHTML=arr.length?arr.map(c=>`<article class="item ${selected.has(c.id)?'selected':''}" onclick="${batch?`pick('${c.id}')`:`edit('${c.id}')`}"><img src="${c.img}" alt="${esc(c.name)}"><span class="number">#${c.no}</span>${batch?`<input class="pick" type="checkbox" tabindex="-1" ${selected.has(c.id)?'checked':''} onclick="event.stopPropagation();pick('${c.id}')">`:''}<div class="info"><strong>${esc(c.name||'待命名單品')}</strong><small>${esc(c.category||'未分類')}${c.brand?' · '+esc(c.brand):''}</small>${c.importPending&&!batch?`<button type="button" class="btn light" style="margin-top:7px;padding:6px 9px" onclick="event.stopPropagation();markImportCategorized('${c.id}')">✓ 已分類</button>`:''}</div></article>`).join(''):'<div class="empty" style="grid-column:1/-1">尚無符合條件的衣服。先上傳照片吧。</div>';$('selectedCount').textContent=`已選 ${selected.size} 件`;$('items').classList.toggle('hidden',filter==='待拆分');$('reviewSection').classList.toggle('hidden',filter!=='待拆分');if(filter==='待拆分')renderReviews()}
+async function markImportCategorized(id){const c=clothes.find(x=>x.id===id);if(!c||!c.importPending)return;if(!c.name||/^待命名單品/.test(c.name)||c.category==='未分類'||!c.category)return notify('請先完成名稱及分類，再點已分類');c.importPending=false;await put('clothes',c);await refresh();notify('已移出最近匯入')}
 function setFilter(v){if(batch)endBatchManagement();filter=v;render()}
 function clearSearchInput(){$('search').value='';render();$('search').focus()}
 function endBatchManagement(){if(!batch)return;batch=false;selected.clear();$('bulk').classList.add('hidden');$('batchToggle').textContent='批量管理';render()}
@@ -337,6 +338,17 @@ async function recheckNames(){
 }
 
 function infer(text){const t=text.toLowerCase();let cat='未分類';if(/dress|one[- ]?piece|連身|洋裝/.test(t))cat='裙子';else if(/skirt|裙/.test(t))cat='裙子';else if(/pant|trouser|jean|denim|shorts|legging|褲/.test(t))cat='褲子';else if(/jacket|coat|blazer|cardigan|outer|parka|外套|夾克/.test(t))cat='外套';else if(/shirt|blouse|top|tee|t-shirt|sweater|knit|polo|hoodie|vest|tank|襯衫|上衣/.test(t))cat='上衣';else if(/bag|belt|hat|scarf|shoe|sneaker|sock|帽|包|鞋|配件|圍巾/.test(t))cat='配件';const material=(t.match(/cotton|linen|wool|silk|denim|leather|cashmere|polyester|nylon|針織|棉|麻|羊毛|絲|牛仔|皮革/i)||[])[0]||'';return {category:cat,material}}
+async function splitSingleProductCard(src){
+ const im=new Image();im.src=src;await im.decode();
+ const w=im.naturalWidth,h=im.naturalHeight;
+ // Typical white-background product images put the garment above a bottom
+ // caption. Preserve photo without its text; OCR only the lower caption area.
+ const cv=document.createElement('canvas');cv.width=w;cv.height=Math.round(h*.85);
+ cv.getContext('2d').drawImage(im,0,0,w,cv.height,0,0,w,cv.height);
+ const label=document.createElement('canvas');label.width=w;label.height=Math.round(h*.25);
+ label.getContext('2d').drawImage(im,0,h-label.height,w,label.height,0,0,w,label.height);
+ return {img:cv.toDataURL('image/jpeg',.9),labelImg:label.toDataURL('image/png')};
+}
 async function uploadFiles(files){
  if(!files?.length)return;
  let count=0,skipped=0,errors=0;
@@ -348,12 +360,23 @@ async function uploadFiles(files){
    const original=await imageData(file),fp=await sourceFingerprint(original);
    if(knownHashes.has(fp)){skipped++;continue}
    const split=mode==='9'?await splitFixedGrid(original,9):await splitGarments(original);
-   if(!split.length)throw Error('未辨識到衣物');if(mode==='auto'&&split.length===1){await addReview(original,fp,file.name,0,true,'自動拆分只找到一個區塊，為避免把多件當一件，請從原圖框選單品');knownHashes.add(fp);continue}
+   if(!split.length)throw Error('未辨識到衣物');if(mode==='auto'&&split.length===1){
+    // A single product photo with a caption is a valid one-item upload,
+    // not necessarily a failed multi-item split. OCR the caption first.
+    const one=await splitSingleProductCard(original);
+    const caption=await nameFromOCR(one.labelImg);
+    if(caption&&/[A-Za-z]{3}/.test(caption)&&caption.length<140){
+     const no=nextNo(),id=crypto.randomUUID(),data=infer(caption);
+     await put('clothes',{id,no,img:one.img,originalImg:original,sourceHash:fp,name:caption,category:data.category,brand:'',material:data.material,memo:'',created:Date.now()+count,importPending:true});
+     count++;knownHashes.add(fp);continue;
+    }
+    await addReview(original,fp,file.name,0,true,'這張照片無法可靠判斷是單品還是合圖；請從原圖框選，或手動設定名稱');knownHashes.add(fp);continue;
+   }
    // Per-image ID keeps the record of exact cells without renumbering internal IDs.
    let i=0;
    for(const v of split){
     i++;const no=nextNo(),id=crypto.randomUUID();
-    const item={id,no,img:v.img,originalImg:original,sourceHash:fp,gridPosition:v.gridPosition||i,name:`待命名單品 #${no}`,category:'未分類',material:'',brand:'',memo:'',created:Date.now()+count};
+    const item={id,no,img:v.img,originalImg:original,sourceHash:fp,gridPosition:v.gridPosition||i,name:`待命名單品 #${no}`,category:'未分類',material:'',brand:'',memo:'',created:Date.now()+count,importPending:true};
     await put('clothes',item);count++;await refresh();
     $('progress').textContent=`${file.name}：${i}/${split.length} 件已入庫，正在讀英文名稱…`;
     const label=await nameFromOCR(v.labelImg);
@@ -693,36 +716,45 @@ async function importPublishedCloset(){
  btn.disabled=true;status.textContent='正在讀取公開衣櫃…';
  try{
   if(!db)throw Error('衣櫃資料庫尚未準備好');
-  // Same-origin URL: use the closet.html next to this app, not the phone's file path.
   const url=new URL('closet.html',location.href);
   const response=await fetch(url.href,{cache:'no-store'});
   if(!response.ok)throw Error('找不到 closet.html（HTTP '+response.status+'）');
-  const documentCopy=new DOMParser().parseFromString(await response.text(),'text/html');
-  const dataTag=documentCopy.getElementById('wardrobe-data');
-  if(!dataTag)throw Error('closet.html 裡找不到衣櫃資料');
-  const rows=JSON.parse(dataTag.textContent);
-  if(!Array.isArray(rows)||!rows.length)throw Error('公開衣櫃資料是空的');
+  const parsed=new DOMParser().parseFromString(await response.text(),'text/html');
+  const tag=parsed.getElementById('wardrobe-data');
+  if(!tag)throw Error('closet.html 裡找不到衣櫃資料');
+  const rows=JSON.parse(tag.textContent);
+  if(!Array.isArray(rows)||!rows.length)throw Error('公開衣櫃資料為空');
   const valid=rows.filter(c=>c&&Number.isInteger(Number(c.no))&&Number(c.no)>0&&typeof c.img==='string'&&c.img.startsWith('data:image/')&&typeof c.name==='string');
-  if(valid.length!==rows.length)throw Error('有部分衣物格式不完整，已取消匯入，避免漏件');
-  if(clothes.length){
-   const proceed=await askConfirm('目前已經有 '+clothes.length+' 件衣服。匯入會加入公開衣櫃資料，可能產生重複。確定繼續？','匯入公開衣櫃');
-   if(!proceed){status.textContent='已取消匯入';return}
+  if(valid.length!==rows.length)throw Error('部分資料格式不完整，已取消匯入');
+  // Photo fingerprints are independent of old/new numbering. Match the whole
+  // base64 photo to protect existing manually edited names, brands and materials.
+  const imageKey=src=>{const v=String(src||'');let h=2166136261>>>0;for(let i=0;i<v.length;i++){h^=v.charCodeAt(i);h=Math.imul(h,16777619)>>>0}return v.length+':'+h.toString(16)};
+  const existingImages=new Set(clothes.flatMap(c=>[c.img,c.originalImg].filter(Boolean).map(imageKey)));
+  const existingImportKeys=new Set(clothes.map(c=>c.importKey).filter(Boolean));
+  const seen=new Set(existingImages),candidates=[];let skipped=0;
+  for(const c of [...valid].sort((a,b)=>Number(a.no)-Number(b.no))){
+   const ik='github-closet-'+Number(c.no),pk=imageKey(c.img);
+   // Do not blindly trust the number alone: a newly revised public catalog
+   // could reuse a number for another garment.
+   if(seen.has(pk)){skipped++;continue}
+   candidates.push(c);seen.add(pk);
   }
-  const existing=new Set(clothes.map(c=>c.importKey).filter(Boolean));
-  let added=0,skipped=0;
-  const ordered=valid.slice().sort((a,b)=>Number(a.no)-Number(b.no));
-  for(const c of ordered){
+  const message=`公開衣櫃共 ${valid.length} 件；比對後預計新增 ${candidates.length} 件、略過重複 ${skipped} 件。只加入新照片，不覆蓋目前衣櫃已編輯的名稱、品牌、材質或照片。確定繼續？`;
+  const proceed=await askConfirm(message,'匯入公開衣櫃','確定繼續','取消匯入');
+  if(!proceed){status.textContent='已取消匯入，原有衣櫃不變';return}
+  let added=0;
+  for(const c of candidates){
    const key='github-closet-'+Number(c.no);
-   if(existing.has(key)){skipped++;continue}
-   const item={id:crypto.randomUUID(),no:clothes.length+added+1,img:c.img,originalImg:c.img,name:c.name,category:CAT.has(c.category)&&c.category!=='全部'?c.category:'未分類',brand:c.brand||'',material:c.material||'',memo:'',created:Date.now()+added,importKey:key};
+   const item={id:crypto.randomUUID(),no:clothes.length+added+1,img:c.img,originalImg:c.img,name:c.name,category:CAT.has(c.category)&&c.category!=='全部'?c.category:'未分類',brand:c.brand||'',material:c.material||'',memo:'',created:Date.now()+added,importKey:key,importPending:true};
    await put('clothes',item);added++;
   }
   await refresh();
-  status.textContent='匯入完成：新增 '+added+' 件，略過 '+skipped+' 件。目前衣櫃共 '+clothes.length+' 件。';
-  notify('衣櫃已匯入 '+added+' 件');
- }catch(e){status.textContent='匯入失敗：'+e.message;notify('匯入失敗，原衣櫃未刪除');}
+  status.textContent=`匯入完成：新增 ${added} 件，略過重複 ${skipped} 件。新增衣物可在「最近匯入」確認。`;
+  notify(`新增 ${added} 件，略過重複 ${skipped} 件`);
+ }catch(e){status.textContent='匯入失敗：'+e.message;notify('匯入失敗，原衣櫃未刪除')}
  finally{btn.disabled=false}
 }
+
 async function backup(){
  const content=JSON.stringify({version:3,clothes,looks,nextNo:localStorage.getItem('wardrobe_next_no')},null,2);
  const file=new File([content],'my-wardrobe-backup.json',{type:'application/json'});
