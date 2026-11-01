@@ -1,53 +1,53 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-01T06:32:58.636Z",
+  "updatedAt": "2026-11-01T09:12:13.778Z",
   "count": 121,
   "clothes": [
     {
       "no": 1,
       "name": "Beige Outdoor Bucket Hat",
       "category": "配件",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "尼龍",
       "memo": ""
     },
     {
       "no": 2,
       "name": "Fuzzy Brown Knit Gloves",
       "category": "配件",
-      "brand": "",
-      "material": "",
+      "brand": "無印良品",
+      "material": "針織",
       "memo": ""
     },
     {
       "no": 3,
       "name": "Plaid Winter Fringe Scarf",
       "category": "配件",
-      "brand": "",
-      "material": "",
+      "brand": "無印良品",
+      "material": "羊毛混紡",
       "memo": ""
     },
     {
       "no": 4,
       "name": "Polar Bear Knit Scarf",
       "category": "配件",
-      "brand": "",
-      "material": "",
+      "brand": "無印良品",
+      "material": "羊毛混紡",
       "memo": ""
     },
     {
       "no": 5,
       "name": "Black Wayfarer Sunglasses",
       "category": "配件",
-      "brand": "",
-      "material": "",
+      "brand": "Klassic",
+      "material": "platic",
       "memo": ""
     },
     {
       "no": 6,
       "name": "North Face Nylon Cap",
       "category": "配件",
-      "brand": "",
+      "brand": "The north face",
       "material": "nylon",
       "memo": ""
     },
@@ -55,47 +55,47 @@
       "no": 7,
       "name": "Emis Charcoal Baseball Cap",
       "category": "配件",
-      "brand": "",
-      "material": "",
+      "brand": "emis",
+      "material": "cotton、twill",
       "memo": ""
     },
     {
       "no": 8,
       "name": "Two Tone Yankees Cap",
       "category": "配件",
-      "brand": "",
-      "material": "",
+      "brand": "MLB",
+      "material": "cotton",
       "memo": ""
     },
     {
       "no": 9,
       "name": "Checkered Button Up Shirt",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Queenshop",
+      "material": "cotton",
       "memo": ""
     },
     {
       "no": 10,
       "name": "Burgundy Chenille Crewneck Sweater",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "URBAN RESEARCH",
+      "material": "chenille",
       "memo": ""
     },
     {
       "no": 11,
       "name": "Pleated Midi Skirt",
       "category": "裙子",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "棉混紡",
       "memo": ""
     },
     {
       "no": 12,
       "name": "Er ml Dark Denim A-line Skirt",
       "category": "裙子",
-      "brand": "",
+      "brand": "Uniqlo",
       "material": "denim",
       "memo": ""
     },
@@ -103,168 +103,168 @@
       "no": 13,
       "name": "Pleated Colorblock Maxi Skirt",
       "category": "裙子",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "聚酯混紡",
       "memo": ""
     },
     {
       "no": 14,
-      "name": "fo suas & Black Mock Neck Top",
+      "name": "Black Mock Neck Top",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "聚酯混紡",
       "memo": ""
     },
     {
       "no": 15,
       "name": "Light Pink Tank Top",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Lativ",
+      "material": "聚酯混紡",
       "memo": ""
     },
     {
       "no": 16,
       "name": "Brown Pleated Embroidered Blouse",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Longgoy",
+      "material": "linen blend",
       "memo": ""
     },
     {
       "no": 17,
       "name": "Black Hooded Parka",
       "category": "外套",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "聚酯纖維、羽絨",
       "memo": ""
     },
     {
       "no": 18,
       "name": "Plaid Mixed Media Coat",
       "category": "外套",
-      "brand": "",
-      "material": "",
+      "brand": "H:Connect",
+      "material": "羊毛混紡、合成纖維",
       "memo": ""
     },
     {
       "no": 19,
       "name": "Quilted Puffer Hooded Jacket",
       "category": "外套",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "羽絨棉、聚脂纖維",
       "memo": ""
     },
     {
       "no": 20,
       "name": "Muted Brown Puffer Jacket",
       "category": "外套",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "羽絨棉、聚酯纖維",
       "memo": ""
     },
     {
       "no": 21,
       "name": "Gray Herringbone Wool Coat",
       "category": "外套",
-      "brand": "",
-      "material": "wool",
+      "brand": "Globalwork",
+      "material": "羊毛混紡",
       "memo": ""
     },
     {
       "no": 22,
       "name": "Classic Brown Patterned Blazer",
       "category": "外套",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "棉混紡、聚酯纖維",
       "memo": ""
     },
     {
       "no": 23,
       "name": "Technical Light Blue Jacket",
       "category": "外套",
-      "brand": "",
-      "material": "",
+      "brand": "迪卡儂",
+      "material": "聚酯纖維",
       "memo": ""
     },
     {
       "no": 24,
       "name": "wy Grey Tailored Trousers",
       "category": "褲子",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "聚酯纖維、棉混紡",
       "memo": ""
     },
     {
       "no": 25,
       "name": "Black Snap Button Cardigan",
       "category": "外套",
-      "brand": "",
-      "material": "",
+      "brand": "無印良品",
+      "material": "棉混紡",
       "memo": ""
     },
     {
       "no": 26,
       "name": "Wide Leg Trousers",
       "category": "褲子",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "棉混紡、聚酯纖維",
       "memo": ""
     },
     {
       "no": 27,
       "name": "Plaid Long Sleeve Top",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "無印良品",
+      "material": "尼龍",
       "memo": ""
     },
     {
       "no": 28,
       "name": "Yellow Button Up Shirt",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "嫘縈纖維",
       "memo": ""
     },
     {
       "no": 29,
       "name": "Blue Button Down Shirt",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "cotton",
       "memo": ""
     },
     {
       "no": 30,
       "name": "Beige Boxy Linen Shirt",
       "category": "上衣",
-      "brand": "",
-      "material": "linen",
+      "brand": "Uniqlo",
+      "material": "亞麻",
       "memo": ""
     },
     {
       "no": 31,
       "name": "Classic Blue Denim Jacket",
       "category": "外套",
-      "brand": "",
-      "material": "denim",
+      "brand": "Lavis",
+      "material": "丹寧",
       "memo": ""
     },
     {
       "no": 32,
-      "name": "Beige Knitted Polo Shirt Pr",
+      "name": "Beige Knitted Polo Shirt",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "coen",
+      "material": "針織",
       "memo": ""
     },
     {
       "no": 33,
       "name": "Light Gray Midi Dress",
       "category": "裙子",
-      "brand": "",
-      "material": "",
+      "brand": "無印良品",
+      "material": "棉混紡",
       "memo": ""
     },
     {
@@ -272,79 +272,79 @@
       "name": "Beige Striped Sleeveless Dress",
       "category": "裙子",
       "brand": "",
-      "material": "",
+      "material": "亞麻",
       "memo": ""
     },
     {
       "no": 35,
       "name": "Sleeveless Black Midi Dress",
       "category": "裙子",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "棉混紡",
       "memo": ""
     },
     {
       "no": 36,
       "name": "Striped Crew Neck Tee",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "無印良品",
+      "material": "cotton",
       "memo": ""
     },
     {
       "no": 37,
       "name": "Wide Leg Beige Jeans",
       "category": "褲子",
-      "brand": "",
-      "material": "",
+      "brand": "無印良品",
+      "material": "丹寧",
       "memo": ""
     },
     {
       "no": 38,
       "name": "Textured Knit Open Jacket",
       "category": "外套",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "針織",
       "memo": ""
     },
     {
       "no": 39,
       "name": "AL he Blue Denim Jeans",
       "category": "褲子",
-      "brand": "",
-      "material": "denim",
+      "brand": "Uniqlo",
+      "material": "丹寧",
       "memo": ""
     },
     {
       "no": 40,
       "name": "Black Elasticated Cotton Trousers",
       "category": "褲子",
-      "brand": "",
+      "brand": "Uniqlo",
       "material": "cotton",
-      "memo": ""
+      "memo": "純棉"
     },
     {
       "no": 41,
       "name": "Light Wash Flared Jeans",
       "category": "褲子",
-      "brand": "",
-      "material": "",
+      "brand": "8 seconds",
+      "material": "丹寧",
       "memo": ""
     },
     {
       "no": 42,
       "name": "Beige Denim Midi Skirt",
       "category": "裙子",
-      "brand": "",
-      "material": "denim",
+      "brand": "Uniqlo",
+      "material": "丹寧",
       "memo": ""
     },
     {
       "no": 43,
       "name": "Light Wash Denim SKirt",
       "category": "裙子",
-      "brand": "",
-      "material": "denim",
+      "brand": "Uniqlo",
+      "material": "丹寧",
       "memo": ""
     },
     {
@@ -352,55 +352,55 @@
       "name": "Brown Belted Midi Skirt",
       "category": "裙子",
       "brand": "",
-      "material": "",
+      "material": "燈芯絨",
       "memo": ""
     },
     {
       "no": 45,
       "name": "Relaxed Fit Gray Trousers",
       "category": "褲子",
-      "brand": "",
-      "material": "",
-      "memo": ""
+      "brand": "Uniqlo",
+      "material": "聚酯纖維",
+      "memo": "透氣舒適"
     },
     {
       "no": 46,
       "name": "Beige Utility Wide Pants",
       "category": "褲子",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "尼龍",
       "memo": ""
     },
     {
       "no": 47,
-      "name": "Beige Wide Leg Trousers",
+      "name": "Beige Wide Leg Pants",
       "category": "褲子",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "尼龍",
       "memo": ""
     },
     {
       "no": 48,
-      "name": "(LUN  Loose Dusty Brown TrAalicare",
+      "name": "Loose Dusty Brown TrAalicare",
       "category": "褲子",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "尼龍混紡",
       "memo": ""
     },
     {
       "no": 49,
       "name": "Light Beige Maxi Skirt",
       "category": "裙子",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "cotton",
       "memo": ""
     },
     {
       "no": 50,
       "name": "Light Wash Distressed Jeans",
       "category": "褲子",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "丹寧",
       "memo": ""
     },
     {
@@ -408,103 +408,103 @@
       "name": "Olive Corduroy Midi Skirt",
       "category": "裙子",
       "brand": "",
-      "material": "",
+      "material": "燈芯絨",
       "memo": ""
     },
     {
       "no": 52,
       "name": "Dark Gray Midi Skirt",
       "category": "裙子",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "棉混紡",
       "memo": ""
     },
     {
       "no": 53,
-      "name": "Elid Bas Wide Leg Sweatpants",
+      "name": "Wide Leg Sweatpants",
       "category": "褲子",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "棉混紡",
       "memo": ""
     },
     {
       "no": 54,
       "name": "Yellow Crewneck Sweatshirt",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "棉混紡",
       "memo": ""
     },
     {
       "no": 55,
       "name": "Graphic White T Shirt",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "奈良美智",
+      "material": "cotton",
       "memo": ""
     },
     {
       "no": 56,
       "name": "Charcoal Boxy T Shirt",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "科技棉、Airism",
       "memo": ""
     },
     {
       "no": 57,
       "name": "Be eit aaah Black Ribbed Tank Top",
       "category": "上衣",
-      "brand": "",
-      "material": "",
-      "memo": ""
+      "brand": "Queenshop",
+      "material": "羅紋棉混紡",
+      "memo": "短板"
     },
     {
       "no": 58,
       "name": "Navy White Lace Top",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "尼龍、鉤編蕾絲",
       "memo": ""
     },
     {
       "no": 59,
       "name": "Ribbed Green Crewneck Shirt",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "羅紋棉混紡",
       "memo": ""
     },
     {
       "no": 60,
       "name": "White Crew Neck Crop",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "合成纖維",
       "memo": ""
     },
     {
       "no": 61,
       "name": "Square Neck Button Top",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Queenshop",
+      "material": "尼龍混紡",
       "memo": ""
     },
     {
       "no": 62,
       "name": "Sleeveless Olive Utility Shirt",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "尼龍混紡",
       "memo": ""
     },
     {
       "no": 63,
       "name": "Uniglo U Heathered T-shirt",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "棉混紡",
       "memo": ""
     },
     {
@@ -512,23 +512,23 @@
       "name": "Striped Dachshund Camp Shirt",
       "category": "上衣",
       "brand": "",
-      "material": "",
+      "material": "尼龍",
       "memo": ""
     },
     {
       "no": 65,
       "name": "Ribbed Scoop Neck Tank",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "羅紋棉混紡",
       "memo": ""
     },
     {
       "no": 66,
       "name": "White Ribbed Mock Neck",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "coen",
+      "material": "羅紋棉混紡",
       "memo": ""
     },
     {
@@ -536,79 +536,79 @@
       "name": "Black Tailored Side Zip Shorts",
       "category": "褲子",
       "brand": "",
-      "material": "",
+      "material": "棉混紡",
       "memo": ""
     },
     {
       "no": 68,
       "name": "Black Lace Trim Tank",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "羅紋棉混紡",
       "memo": ""
     },
     {
       "no": 69,
       "name": "Dark Gray Utility Vest",
       "category": "外套",
-      "brand": "",
-      "material": "",
+      "brand": "pazzo",
+      "material": "聚酯纖維",
       "memo": ""
     },
     {
       "no": 70,
       "name": "Olive Ribbed Halter Top",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "羅紋棉混紡",
       "memo": ""
     },
     {
       "no": 71,
       "name": "White Graphic Crewneck Tee",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Wacky WiLLy",
+      "material": "cotton",
       "memo": ""
     },
     {
       "no": 72,
       "name": "Yellow Ribbed Crew T- Shirt",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "羅紋棉混紡",
       "memo": ""
     },
     {
       "no": 73,
       "name": "Olive Ribbed Long Sleeve",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "羅紋棉混紡",
       "memo": ""
     },
     {
       "no": 74,
-      "name": "Lr Ea Yellow Ribbed Knit Cardigan",
+      "name": "Yellow Ribbed Knit Cardigan",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "針織",
       "memo": ""
     },
     {
       "no": 75,
       "name": "Mock Neck Sweatshirt",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "棉混紡",
       "memo": ""
     },
     {
       "no": 76,
       "name": "Gray Long Sleeve Polo",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "針織",
       "memo": ""
     },
     {
@@ -616,87 +616,87 @@
       "name": "Ombre Tiered Maxi Dress",
       "category": "裙子",
       "brand": "",
-      "material": "",
+      "material": "cotton",
       "memo": ""
     },
     {
       "no": 78,
       "name": "High Waisted Denim Shorts",
       "category": "褲子",
-      "brand": "",
-      "material": "denim",
+      "brand": "Uniqlo",
+      "material": "丹寧",
       "memo": ""
     },
     {
       "no": 79,
       "name": "Technical Charcoal Hiking Pants",
       "category": "褲子",
-      "brand": "",
-      "material": "",
+      "brand": "迪卡儂",
+      "material": "聚酯混紡",
       "memo": ""
     },
     {
       "no": 80,
       "name": "Beige Sleeveless Mock Sweater",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "針織",
       "memo": ""
     },
     {
       "no": 81,
       "name": "Striped Henley Knit Sweater",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "針織",
       "memo": ""
     },
     {
       "no": 82,
       "name": "Beige Pinstriped Button Shirt",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "cotton",
       "memo": ""
     },
     {
       "no": 83,
       "name": "White Quilted Puffer Jacket",
       "category": "外套",
-      "brand": "",
-      "material": "",
+      "brand": "迪卡儂",
+      "material": "鴨絨",
       "memo": ""
     },
     {
       "no": 84,
       "name": "Beige Ribbed Mock Neck",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "針織",
       "memo": ""
     },
     {
       "no": 85,
       "name": "La) NEEEEERNETTNa  Green Crew Neck Sweater",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "針織",
       "memo": ""
     },
     {
       "no": 86,
       "name": "Light Gray Sweatshorts",
       "category": "褲子",
-      "brand": "",
-      "material": "",
+      "brand": "Martin kim",
+      "material": "棉混紡",
       "memo": ""
     },
     {
       "no": 87,
-      "name": "Off White Wide Pants",
+      "name": "Off White Wide Leg Trousers",
       "category": "褲子",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "尼龍",
       "memo": ""
     },
     {
@@ -704,63 +704,63 @@
       "name": "Sg Halter Neck Printed Dress",
       "category": "裙子",
       "brand": "",
-      "material": "",
+      "material": "cotton",
       "memo": ""
     },
     {
       "no": 89,
-      "name": "Beal waaa Charcoal Wide Leg Trousers",
+      "name": "Charcoal Wide Leg Trousers",
       "category": "褲子",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "尼龍",
       "memo": ""
     },
     {
       "no": 90,
       "name": "Blue Crewneck Sweatshirt",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "棉混紡",
       "memo": ""
     },
     {
       "no": 91,
       "name": "Grey Knit Cardigan Sweater",
       "category": "外套",
-      "brand": "",
-      "material": "",
+      "brand": "polo ralph lauren",
+      "material": "針織、羊毛混紡",
       "memo": ""
     },
     {
       "no": 92,
       "name": "Striped Knit Polo Shirt",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "針織",
       "memo": ""
     },
     {
       "no": 93,
       "name": "Ribbed Mock Neck Top",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "羅紋棉混紡",
       "memo": ""
     },
     {
       "no": 94,
       "name": "Beige Crew Neck Sweater",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "針織",
       "memo": ""
     },
     {
       "no": 95,
       "name": "Beige Mock Neck Top",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "棉混紡",
       "memo": ""
     },
     {
@@ -768,7 +768,7 @@
       "name": "Patterned Knit Sweater Vest",
       "category": "上衣",
       "brand": "",
-      "material": "",
+      "material": "針織",
       "memo": ""
     },
     {
@@ -776,7 +776,7 @@
       "name": "Striped Knit Button Cardigan",
       "category": "上衣",
       "brand": "",
-      "material": "",
+      "material": "針織",
       "memo": ""
     },
     {
@@ -784,15 +784,15 @@
       "name": "Blue White Mesh Top",
       "category": "上衣",
       "brand": "",
-      "material": "",
+      "material": "聚酯纖維、尼龍",
       "memo": ""
     },
     {
       "no": 99,
-      "name": "hE Violet Knit Sweater Vest",
+      "name": "Violet Knit Sweater Vest",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "針織",
       "memo": ""
     },
     {
@@ -800,23 +800,23 @@
       "name": "Striped Zip Up Cardigan",
       "category": "上衣",
       "brand": "",
-      "material": "",
+      "material": "針織",
       "memo": ""
     },
     {
       "no": 101,
       "name": "Blue Crew Neck Sweater",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "針織",
       "memo": ""
     },
     {
       "no": 102,
       "name": "Olive Green Wool Sweater",
       "category": "上衣",
-      "brand": "",
-      "material": "wool",
+      "brand": "Uniqlo",
+      "material": "羊毛混紡",
       "memo": ""
     },
     {
@@ -824,103 +824,103 @@
       "name": "Ombre Ribbed Cape Cardigan",
       "category": "上衣",
       "brand": "",
-      "material": "",
+      "material": "針織",
       "memo": ""
     },
     {
       "no": 104,
       "name": "Gray Knit Turtleneck Sweater",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "針織",
       "memo": ""
     },
     {
       "no": 105,
       "name": "Beige Heathered Hooded Sweatshirt",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "棉混紡",
       "memo": ""
     },
     {
       "no": 106,
       "name": "BY Light Wash Denim Wide Jeans",
       "category": "褲子",
-      "brand": "",
-      "material": "denim",
+      "brand": "Uniqlo",
+      "material": "丹寧",
       "memo": ""
     },
     {
       "no": 107,
       "name": "Burgundy Cropped Sweatshirt",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "針織",
       "memo": ""
     },
     {
       "no": 108,
       "name": "A a PCF IEAES Quilted Sleeveless Vest",
       "category": "外套",
-      "brand": "",
-      "material": "",
+      "brand": "無印良品",
+      "material": "羽絨棉、聚酯纖維",
       "memo": ""
     },
     {
       "no": 109,
       "name": "Ribbed Mock Neck Sweater",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "羅紋棉混紡",
       "memo": ""
     },
     {
       "no": 110,
       "name": "Cream Short Sleeve Tee",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "cotton",
       "memo": ""
     },
     {
       "no": 111,
       "name": "Navy Button Down Shirt",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "棉混紡",
       "memo": ""
     },
     {
       "no": 112,
       "name": "Light Beige Crewneck Tee",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "聚酯混紡",
       "memo": ""
     },
     {
       "no": 113,
       "name": "Striped Ribbed Crewneck Tee",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "羅紋棉混紡",
       "memo": ""
     },
     {
       "no": 114,
       "name": "Heather Gray Cropped Tee",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "cotton",
       "memo": ""
     },
     {
       "no": 115,
       "name": "Ribbed Eye Tank Top",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "羅紋棉混紡",
       "memo": ""
     },
     {
@@ -935,24 +935,24 @@
       "no": 117,
       "name": "Striped Crewneck Pocket Tee",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "無印良品",
+      "material": "棉混紡",
       "memo": ""
     },
     {
       "no": 118,
       "name": "Striped Graphic Polo Shirt",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "8 seconds",
+      "material": "針織",
       "memo": ""
     },
     {
       "no": 119,
       "name": "Blue Ribbed T-Shirt",
       "category": "上衣",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "羅紋棉混紡",
       "memo": ""
     },
     {
@@ -960,15 +960,15 @@
       "name": "Red Ringer T Shirt",
       "category": "上衣",
       "brand": "",
-      "material": "",
+      "material": "cotton",
       "memo": ""
     },
     {
       "no": 121,
       "name": "Black Athletic Jogger Pants",
       "category": "褲子",
-      "brand": "",
-      "material": "",
+      "brand": "Uniqlo",
+      "material": "聚酯纖維",
       "memo": ""
     }
   ]

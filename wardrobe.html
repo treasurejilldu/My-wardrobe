@@ -371,7 +371,7 @@ async function uploadFiles(files){
 
 let cropStart=null,cropArea=null,cropSource=null,cropMode='add',cropTarget=null;
 function closeCrop(){$('cropLayer').classList.remove('show');cropArea=null;cropStart=null;reviewCurrent=null}
-function openCrop(mode='add'){const c=clothes.find(x=>x.id===current);if(!c||!(c.originalImg||c.img))return;cropMode=mode;cropTarget=mode==='replace'?c.id:null;cropSource=c.originalImg||c.img;$('cropTitle').textContent=mode==='replace'?'修正本件照片截圖':'從原圖框選補件';$('cropSaveBtn').textContent=mode==='replace'?'套用到這件衣服':'新增框選衣服';$('cropOriginal').src=cropSource;$('cropRect').style.display='none';cropArea=null;$('cropLayer').classList.add('show')}
+function openCrop(mode='add'){const c=clothes.find(x=>x.id===current);if(!c||!(changedImg||c.originalImg||c.img))return;cropMode=mode;cropTarget=mode==='replace'?c.id:null;cropSource=changedImg||c.originalImg||c.img;$('cropTitle').textContent=mode==='replace'?'修正本件照片截圖':'從原圖框選補件';$('cropSaveBtn').textContent=mode==='replace'?'套用到這件衣服':'新增框選衣服';$('cropOriginal').src=cropSource;$('cropRect').style.display='none';cropArea=null;$('cropLayer').classList.add('show')}
 function cropCoords(e){const b=$('cropOriginal').getBoundingClientRect();return {x:Math.max(0,Math.min(1,(e.clientX-b.left)/b.width)),y:Math.max(0,Math.min(1,(e.clientY-b.top)/b.height))}}
 function cropDraw(){if(!cropArea)return;const a=cropArea,r=$('cropRect');r.style.display='block';r.style.left=(Math.min(a.x0,a.x1)*100)+'%';r.style.top=(Math.min(a.y0,a.y1)*100)+'%';r.style.width=(Math.abs(a.x1-a.x0)*100)+'%';r.style.height=(Math.abs(a.y1-a.y0)*100)+'%'}
 const cropWrapper=$('cropWrap');cropWrapper.addEventListener('pointerdown',e=>{cropStart=cropCoords(e);cropArea={x0:cropStart.x,y0:cropStart.y,x1:cropStart.x,y1:cropStart.y};cropWrapper.setPointerCapture(e.pointerId);cropDraw()});cropWrapper.addEventListener('pointermove',e=>{if(!cropStart)return;const v=cropCoords(e);cropArea.x1=v.x;cropArea.y1=v.y;cropDraw()});cropWrapper.addEventListener('pointerup',e=>{if(!cropStart)return;const v=cropCoords(e);cropArea.x1=v.x;cropArea.y1=v.y;cropStart=null;cropDraw()});
@@ -386,7 +386,7 @@ async function saveCrop(){
  const result=c.toDataURL('image/jpeg',.9);
  if(cropMode==='replace'&&cropTarget){
    const item=clothes.find(v=>v.id===cropTarget);if(!item)return notify('這件衣服已不存在');
-   item.img=result;item.manualCrop=true;await put('clothes',item);
+   item.img=result;item.manualCrop=true;if(changedImg)item.originalImg=cropSource;await put('clothes',item);
    changedImg=null;$('editImg').src=result;await refresh();closeCrop();notify('已更新本件截圖，不會另外新增衣服');return;
  }
  const no=nextNo();const item={id:crypto.randomUUID(),no,img:result,originalImg:cropSource,sourceHash:(reviews.find(r=>r.id===reviewCurrent)||{}).sourceHash||'',name:'待命名單品 #'+no,category:'未分類',material:'',brand:'',memo:'手動補件',created:Date.now(),manualCrop:true};
@@ -446,7 +446,7 @@ function hideSavedValueSuggestions(kind){setTimeout(()=>{const menu=$(kind==='br
 function edit(id){current=id;changedImg=null;const c=clothes.find(x=>x.id===id);if(!c)return;$('editNo').textContent='#'+c.no;$('editImg').src=c.img;$('editName').value=c.name;$('editCat').value=CAT.has(c.category)?c.category:'未分類';editorTags={brand:c.brand?[String(c.brand)]:[],material:parseMaterialTags(c.material)};$('editBrand').value='';$('editMat').value='';renderEditorTags('brand');renderEditorTags('material');$('editMemo').value=c.memo||'';if(c.splitReview)notify('這張原圖未能可靠拆分，請確認是否有其他衣服漏入庫');$('editorLayer').classList.add('show')}
 function closeEditor(){$('editorLayer').classList.remove('show');current=null}
 async function replaceImg(f){if(!f)return;changedImg=await imageData(f);$('editImg').src=changedImg}
-async function saveEdit(){const c=clothes.find(x=>x.id===current);if(!c)return;addEditorTag('brand');addEditorTag('material');c.name=$('editName').value.trim()||`待命名單品 #${c.no}`;c.category=$('editCat').value;c.categoryManual=true;c.brand=editorTags.brand[0]||'';c.material=editorTags.material.join('、');c.memo=$('editMemo').value.trim();saveValueToHistory('brand',c.brand);saveValueToHistory('material',c.material);if(changedImg)c.img=changedImg;await put('clothes',c);closeEditor();await refresh();notify('已儲存')}
+async function saveEdit(){const c=clothes.find(x=>x.id===current);if(!c)return;addEditorTag('brand');addEditorTag('material');c.name=$('editName').value.trim()||`待命名單品 #${c.no}`;c.category=$('editCat').value;c.categoryManual=true;c.brand=editorTags.brand[0]||'';c.material=editorTags.material.join('、');c.memo=$('editMemo').value.trim();saveValueToHistory('brand',c.brand);saveValueToHistory('material',c.material);if(changedImg){c.img=changedImg;c.originalImg=changedImg;}await put('clothes',c);closeEditor();await refresh();notify('已儲存')}
 async function deleteItem(){const c=clothes.find(x=>x.id===current);if(!c)return;if(!await askConfirm(`確定刪除 #${c.no}「${c.name}」？`, '刪除單品'))return;await del('clothes',c.id);for(const l of looks){l.ids=(l.ids||[]).filter(id=>id!==c.id);await put('looks',l)}slots=slots.map(x=>x===c.id?null:x);closeEditor();await refresh();notify('單品已刪除')}
 let boardPositions={};let draggingOutfit=null;
 let boardBgEnabled=true,boardBgStrength=22;
