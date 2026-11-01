@@ -863,7 +863,11 @@ ${instructions}
 ${weather}
 請核對衣櫃照片、英文名稱與分類；每件標明正確編號、名稱與用途，不確定就說明。
 評估舒適度、活動強度、保暖程度、色彩層次及拍照美感。${layers}
-不用生成圖片。`;
+不用生成圖片。
+
+【最後請另外附上以下兩個結論，放在所有每日推薦之後】
+一、每日精選搭配總表：依照日期順序，每天只列「當日首選」的完整單品編號組合與一句簡短理由。每一天單獨一行，使用固定格式「日期｜首選：7 + 23 + 83 + 79｜理由：……」。編號組合務必完整、正確、可直接複製貼入 MY WARDROBE 的單日白板；不要把不同日期合併成一組，也不要混入其他數字、替代編號或非衣櫃單品。若有未確認的單品，明確標示，不能猜編號。
+二、整體補充建議：統整這次穿搭的實用提醒，包括天氣與溫差應變、鞋包和配件、內搭及防曬／防雨需求；如果是多天或旅程，另外整理衣物重複利用、精簡行李與洗換注意事項。避免重複逐日內容，只補充最有幫助的重點。`;
  $('askPrompt').value=prompt;
  try{localStorage.setItem('wardrobe-ask-fields-v424',JSON.stringify({mode:askMode,days:askDays,needs,url,sets,weather:$('askWeather').checked,layers:$('askLayers').checked,trip:{start:$('askTripStart').value,end:$('askTripEnd').value,placeMode:$('askTripPlaceMode').value,place:$('askTripPlace').value,activityMode:$('askTripActivityMode').value,activities:$('askTripActivities').value}}))}catch(e){}
  return prompt;
