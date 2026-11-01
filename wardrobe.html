@@ -886,7 +886,7 @@ function renderAskDays(){
 function addAskDay(){readAskDays();askDays.push(makeAskDay());renderAskDays()}
 function generateAskPrompt(){
  readAskDays();
- const needs=$('askNeeds').value.trim()||'舒適、耐走、有層次、符合每天活動';
+ const needs=$('askNeeds').value.trim()||'舒適、耐走、配色協調、有層次、兼顧拍照美感與每天活動';
  const url=$('askClosetUrl').value.trim()||'請參考我另外提供的衣櫃資料';
  const indexUrl=/\/closet\.html(?:[?#].*)?$/i.test(url)?url.replace(/closet\.html(?:[?#].*)?$/i,'wardrobe-data.json'):'';
  const sets=$('askSets').value;
@@ -900,7 +900,7 @@ function generateAskPrompt(){
 旅程日期：${start||'未填'} ～ ${end||'未填'}
 旅程地點：${place}
 旅程活動／行程：${activity}`;
-  instructions=`請先根據行程整理每日地點與活動，再按日期推薦各 ${sets} 套，選出首選；不明確的行程不要猜。
+  instructions=`請先根據行程整理每日地點與活動，再按日期推薦各 ${sets} 套，選出兼顧美感與實用性的首選；不明確的行程不要猜。
 旅程首選的上衣／貼身內搭盡量每天不同，外套、褲裙、鞋包配件可重複；備選上衣也盡量不重複，衣物不足請說明。
 跨夜航班、轉機及時差要優先考慮不換衣的便利性：登機至落地接續活動可穿同一套，註記「延續飛行穿搭」，不算重複。航班不明就標示不確定。
 每天以「第 N 天｜日期｜地點」分段，每套獨立列一行「編號：7 + 23 + 83 + 79」，方便直接貼回 App。`; 
@@ -913,7 +913,7 @@ function generateAskPrompt(){
 共 ${askDays.length} 天
 
 ${days}`;
-  instructions=`請依日期每天推薦 ${sets} 套並選出首選，考慮舒適、配色及重複搭配。每天分段，每套獨立一行「編號：7 + 23 + 83 + 79」，方便貼回 App。`;
+  instructions=`請依日期每天推薦 ${sets} 套並選出首選，兼顧舒適與美感：顏色協調、比例平衡、材質層次、拍照效果，避免只有功能性卻不好看的組合。每天分段，每套獨立一行「編號：7 + 23 + 83 + 79」，方便貼回 App。`;
  }
  const weather=$('askWeather').checked?'請查詢各地天氣、風雨與溫差（遠期只提供氣候參考）。':'不必額外查天氣。';
  const layers=$('askLayers').checked?'必要時註明保暖、排汗或防風防雨層。':'';
@@ -924,12 +924,12 @@ ${days}`;
 ${attachmentMode?'📎 行程／地點詳見我另附的檔案或照片。':''}
 
 ${instructions}
-${weather}請核對衣櫃照片、名稱和編號，不確定就說明。${layers}
+${weather}請核對衣櫃照片、名稱和編號，不確定就說明。搭配須考慮配色、版型比例、層次與整體風格；別只以保暖方便為由犧牲美感。${layers}
 
-【請簡潔回答】每天只要：日期／地點與活動摘要、${sets} 套穿搭（各含編號、主要單品名稱、最多一句理由）、當日首選。不要逐件長篇介紹、重複天氣或生成圖片。
+【請簡潔回答】每天只要：日期／地點與活動摘要、${sets} 套穿搭（各含編號、主要單品名稱、最多一句理由，點出實用性與美感）、當日首選。不要逐件長篇介紹、重複天氣或生成圖片。
 【最後結論】
 1. 每日首選總表：每日期一行「日期｜編號：7 + 23 + 83 + 79｜一句理由」，每組獨立方便複製；跨夜飛行如沿用同套請註記。
-2. 整體補充建議：用 3～5 點統整溫差、重複利用、行李精簡、鞋包及飛行日換衣便利性；不要重述每日內容。`;
+2. 整體補充建議：用 3～5 點統整色彩搭配、比例層次、溫差、重複利用、行李精簡、鞋包及飛行日換衣便利性；不要重述每日內容。`;
  $('askPrompt').value=prompt;
  try{localStorage.setItem('wardrobe-ask-fields-v424',JSON.stringify({mode:askMode,days:askDays,needs,url,sets,weather:$('askWeather').checked,layers:$('askLayers').checked,trip:{start:$('askTripStart').value,end:$('askTripEnd').value,placeMode:$('askTripPlaceMode').value,place:$('askTripPlace').value,activityMode:$('askTripActivityMode').value,activities:$('askTripActivities').value}}))}catch(e){}
  return prompt;
