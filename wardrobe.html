@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f7f4ef"><title>MY WARDROBE · V4.3</title><style>
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f7f4ef"><title>MY WARDROBE · V4.16</title><style>
 :root{--bg:#f7f4ef;--card:#fff;--ink:#352f2b;--muted:#8b827b;--accent:#75675d;--line:#e4ddd4;--chip:#ede7df}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC",Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}main{max-width:780px;margin:auto;padding:18px 16px 110px}header{padding:25px 16px 14px;text-align:center}header small{font-size:10px;letter-spacing:2px;color:var(--muted)}header h1{margin:8px 0;font-size:25px;letter-spacing:1.5px}.sub,.hint{color:var(--muted);font-size:12px;line-height:1.65}.tab{display:none}.tab.active{display:block}.row{display:flex;align-items:center;justify-content:space-between;gap:8px}.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.btn{padding:10px 13px;border:0;border-radius:11px;background:var(--accent);color:#fff;font-weight:600;font-size:13px}.btn.light{background:var(--chip);color:var(--ink)}.btn.outline{background:#fff;color:var(--ink);border:1px solid var(--line)}.btn.danger{background:#aa4844}.btn:disabled{opacity:.5}.card{background:var(--card);padding:16px;border-radius:17px;margin:12px 0;border:1px solid #efe9e3}h2{font-size:19px;margin:10px 0 13px}h3{font-size:15px}.pills{display:flex;gap:7px;overflow:auto;padding:6px 0 12px}.pill{border-radius:50px;border:1px solid var(--line);background:#fff;padding:8px 13px;white-space:nowrap;font-size:12px}.pill.on{background:var(--accent);color:white}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.item{position:relative;background:white;border:1px solid #eee7e0;border-radius:14px;overflow:hidden}.item img{display:block;width:100%;height:190px;object-fit:contain;background:#f5f3ef}.info{padding:9px 10px}.info strong{font-size:12px;display:block;line-height:1.5;overflow-wrap:anywhere}.info small{color:var(--muted);font-size:11px;display:block;margin-top:4px}.number{display:inline-flex;background:#403a34;color:white;border-radius:7px;padding:4px 7px;font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}.item .number{position:absolute;top:8px;left:8px}.item.selected{outline:3px solid var(--accent)}.item .pick{position:absolute;top:7px;right:7px;width:28px;height:28px;accent-color:var(--accent)}input[type=text],input[type=number],select,textarea{width:100%;border:1px solid var(--line);border-radius:11px;background:#fff;padding:12px;color:var(--ink);min-width:0}label{font-size:12px;color:#635a53;display:block;margin:13px 0 5px}.mini{font-size:12px;color:var(--muted)}.empty{padding:30px 10px;text-align:center;color:var(--muted);background:white;border-radius:13px;border:1px dashed var(--line)}nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:center;gap:0;background:#fff;box-shadow:0 -2px 20px #0001;padding:10px 0 calc(10px + env(safe-area-inset-bottom));z-index:8}nav button{width:25%;max-width:180px;background:transparent;border:0;color:#938b83;font-size:12px;padding:8px 0}nav button.on{color:#53483f;font-weight:800}nav b{display:block;font-size:20px;padding-bottom:3px}.sheet-cover{position:fixed;inset:0;background:#201a17aa;z-index:12;display:none;align-items:flex-end;justify-content:center}.sheet-cover.show{display:flex}.sheet{background:var(--bg);border-radius:22px 22px 0 0;max-height:94dvh;overflow:auto;width:min(780px,100%);padding:20px 18px 35px}.preview{max-width:100%;max-height:260px;object-fit:contain;display:block;margin:auto;background:white;border-radius:12px}.slots{display:grid;grid-template-columns:1fr 1fr;gap:10px}.slot{background:#fff;border:1px dashed #cfc6bc;border-radius:14px;min-height:155px;text-align:center;padding:10px;cursor:pointer}.slot img{width:100%;height:125px;object-fit:contain}.slot .mini{font-size:11px}.look{display:flex;gap:12px}.look img{width:63px;height:80px;object-fit:contain;border-radius:8px;background:#f6f3ef}.toast{position:fixed;bottom:95px;left:50%;transform:translateX(-50%);padding:12px 18px;background:#342b25;color:white;border-radius:30px;font-size:12px;z-index:50;display:none;max-width:90vw;text-align:center} .hidden{display:none!important}.status{font-size:12px;color:#746b62;margin:8px 0}.badge{border-radius:7px;padding:4px 7px;background:var(--chip);font-size:11px} .splitbox{padding:10px;background:#fff;border-radius:12px;border:1px solid var(--line)}.splitbox img{max-width:100%;height:110px;object-fit:contain} .footer{font-size:11px;color:#8f857a;margin-top:20px;line-height:1.7}
  .confirm-mask{position:fixed;inset:0;background:#211b18a8;z-index:100;display:none;align-items:center;justify-content:center;padding:20px}.confirm-mask.show{display:flex}.confirm-box{background:#fff;border-radius:18px;padding:23px;width:min(420px,100%);box-shadow:0 12px 45px #0003}.confirm-box h3{margin:0 0 10px;font-size:18px}.confirm-box p{font-size:14px;line-height:1.7;color:#655b53}.confirm-box .actions{justify-content:flex-end;margin-top:18px}
 
@@ -46,6 +46,24 @@ nav{padding-top:5px;padding-bottom:calc(5px + env(safe-area-inset-bottom));align
 nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:6px 0;min-height:45px;line-height:13px}
 nav button b{display:flex;align-items:center;justify-content:center;flex:none;height:19px;padding:0;margin:0;line-height:1}
 nav button svg{display:block;width:19px;height:19px;flex:none}
+
+/* V4.6 · editorial staggered styling board */
+.board-wrap{background:#F3F0E8;border:1px solid #D9D0C4;border-radius:19px;box-shadow:0 8px 24px rgba(76,54,40,.065);overflow:hidden}
+.outfit-canvas{background:#F3F0E8;min-height:530px;position:relative;touch-action:pan-y}
+.outfit-card{width:var(--card-width,54%);height:var(--card-height,185px);background:transparent;border:0;box-shadow:none;border-radius:9px;touch-action:none}
+.outfit-card img{object-fit:contain;background:transparent;filter:drop-shadow(0 3px 2px rgba(68,50,40,.09))}
+.outfit-card .remove{right:2px;top:2px;background:#fffefaee;border:1px solid #D9D0C4;color:#594436;width:25px;height:25px}
+.outfit-card .item-tag{left:3px;bottom:3px;background:#fffef7e8;color:#594436}
+.board-add{background:#fff9f0ed;border:1px solid #D9D0C4;color:#594436}
+@media(max-width:420px){.outfit-canvas{min-height:530px}.outfit-card{width:var(--card-width,54%);height:var(--card-height,185px)}}
+
+/* V4.7 · single-screen editorial board */
+.board-wrap{width:100%;max-width:530px;margin:10px auto 6px}
+.outfit-canvas{min-height:0!important;max-height:640px;overflow:hidden}
+.outfit-card{height:var(--card-height,165px)!important;width:var(--card-width,52%)!important}
+
+/* V4.10 · legible full-size garments within a single phone board */
+.outfit-card img{filter:drop-shadow(0 2px 2px rgba(68,50,40,.1))}
 </style></head><body>
 <header><h1>MY WARDROBE</h1></header><main>
 <section class="tab active" id="closet"><div class="row"><h2>我的衣櫃 <span id="total" class="mini"></span></h2><button class="btn" onclick="document.getElementById('upload').click()">＋ 上傳</button></div><input id="upload" type="file" multiple accept="image/*" class="hidden" onchange="uploadFiles(this.files);this.value=''">
@@ -53,7 +71,7 @@ nav button svg{display:block;width:19px;height:19px;flex:none}
 <div class="row" style="margin-bottom:12px"><button class="btn light" onclick="toggleBatch()" id="batchToggle">批量管理</button></div>
 <div id="bulk" class="card hidden"><div class="row"><strong id="selectedCount">已選 0 件</strong><div class="actions"><button class="btn light" onclick="chooseAll()">全選目前分類</button><button class="btn light" onclick="clearSelection()">取消選取</button></div></div><label>批次設定分類</label><div class="actions"><select id="bulkCategory" style="flex:1"></select><button class="btn" onclick="bulkCategoryApply()">套用</button></div><div class="actions" style="margin-top:12px"><button class="btn outline" onclick="exportSelected()">匯出選取資料</button><button class="btn danger" onclick="bulkDelete()">批次刪除</button></div></div>
 <div class="grid" id="items"></div></section>
-<section class="tab" id="stylist"><div class="row"><h2>穿搭拼貼</h2><button class="btn light" onclick="clearSlots()">清空</button></div><div class="card"><label>衣物編號</label><div class="actions"><input type="text" style="flex:1" id="numberEntry" placeholder="例如 12 + 8 + 23" inputmode="text"><button class="btn" onclick="applyNumbers()">叫出穿搭</button></div><div id="numberFeedback" class="mini" style="margin-top:6px"></div></div><div class="outfit-settings"><button type="button" class="btn light" id="bgModeBtn" onclick="toggleBoardBackground()">白底去背：開</button><label for="bgStrength">去背強度 <span id="bgStrengthValue">22</span></label><input id="bgStrength" type="range" min="8" max="52" step="2" value="22" oninput="setBoardStrength(this.value)" aria-label="白底去背強度"></div><div class="board-wrap"><div id="board" class="outfit-canvas" aria-label="可拖移的穿搭白底畫布"></div><button type="button" class="board-add" onclick="addToBoard()" aria-label="加入衣物">＋ 加入</button></div><div class="card"><label>這套穿搭的名稱</label><input id="lookName" type="text" placeholder="例如：週末咖啡散步"><label>小備註／穿搭日記</label><textarea id="lookMemo" rows="3" placeholder="今天穿這套去哪裡、感覺如何…"></textarea><label>穿搭日期（選填）</label><input type="date" id="lookDate" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:10px"><button style="width:100%;margin-top:14px" class="btn" onclick="saveLook()">儲存這套穿搭</button></div></section>
+<section class="tab" id="stylist"><div class="row"><h2>穿搭拼貼</h2><button class="btn light" onclick="clearSlots()">清空</button></div><div class="card"><label>衣物編號</label><div class="actions"><input type="text" style="flex:1" id="numberEntry" placeholder="例如 12 + 8 + 23" inputmode="text"><button class="btn" onclick="applyNumbers()">叫出穿搭</button></div><div id="numberFeedback" class="mini" style="margin-top:6px"></div></div><div class="outfit-settings"><button type="button" class="btn light" id="bgModeBtn" onclick="toggleBoardBackground()">白底去背：開</button><label for="bgStrength">去背強度 <span id="bgStrengthValue">22</span></label><input id="bgStrength" type="range" min="8" max="52" step="2" value="22" oninput="setBoardStrength(this.value)" aria-label="白底去背強度"></div><div class="board-wrap"><div id="board" class="outfit-canvas" aria-label="可拖移的暖燕麥色錯位穿搭畫布"></div><button type="button" class="board-add" onclick="addToBoard()" aria-label="加入衣物">＋ 加入</button></div><div class="card"><label>這套穿搭的名稱</label><input id="lookName" type="text" placeholder="例如：週末咖啡散步"><label>小備註／穿搭日記</label><textarea id="lookMemo" rows="3" placeholder="今天穿這套去哪裡、感覺如何…"></textarea><label>穿搭日期（選填）</label><input type="date" id="lookDate" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:10px"><button style="width:100%;margin-top:14px" class="btn" onclick="saveLook()">儲存這套穿搭</button></div></section>
 <section class="tab" id="looks"><h2>我的收藏</h2><div id="lookList"></div></section>
 <section class="tab" id="share"><h2>分享衣櫃給 ChatGPT</h2><div class="card"><strong>生成可分享的衣櫃網頁</strong><p class="hint">下載 closet.html → 上傳 GitHub → 分享公開網址。</p><button class="btn" onclick="exportPublicCloset()">產生公開衣櫃 closet.html</button><div id="shareExportPanel" class="hidden" style="margin-top:14px"><div class="actions"><button class="btn" onclick="shareClosetFile()">用 iPhone 分享檔案</button><button class="btn light" onclick="copyClosetHTML()">複製 HTML</button><button class="btn light" onclick="downloadClosetFallback()">再試下載</button></div><p class="mini">如果無法分享，點「複製 HTML」再貼進可儲存 .html 的文字編輯器。不要把 121 件衣服的原始 HTML 直接貼到公開訊息。</p><textarea id="closetHTMLExport" readonly style="width:100%;height:105px;font-size:12px;display:none" aria-label="公開衣櫃 HTML"></textarea></div><p class="mini">公開頁面包含衣服照片與名稱，不包含私人日記。</p></div><div class="card"><strong>從公開衣櫃帶入衣服</strong><p class="mini">已將 closet.html 放在 GitHub 同一資料夾？按下即可載入照片、名稱、分類與編號。既有單品不會自動刪除。</p><button class="btn" id="importClosetButton" onclick="importPublishedCloset()">從 closet.html 匯入衣櫃</button><p class="mini" id="closetImportStatus" aria-live="polite"></p></div><div class="card"><strong>備份或搬家</strong><div class="actions"><button class="btn light" onclick="backup()">下載完整備份</button><button class="btn light" onclick="document.getElementById('import').click()">匯入備份</button><input id="import" class="hidden" type="file" accept="application/json" onchange="importBackup(this.files[0]);this.value=''"></div></div></section>
 </main><nav><button data-go="closet" class="on" onclick="go('closet')"><b><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M9 4v17M15 4v17M5.5 8h1M11.5 8h1M17.5 8h1"/></svg></b>衣櫃</button><button data-go="stylist" onclick="go('stylist')"><b><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M3 12h18"/><path d="M5 5l14 14M19 5L5 19"/></svg></b>穿搭</button><button data-go="looks" onclick="go('looks')"><b><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg></b>收藏</button><button data-go="share" onclick="go('share')"><b><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M12 15V3m-4 4 4-4 4 4"/></svg></b>分享</button></nav>
@@ -339,39 +357,104 @@ const cutoff=255-strength;const isBg=(idx)=>{const j=idx*4,r=a[j],g=a[j+1],b=a[j
 const add=(i)=>{if(!marked[i]&&isBg(i)){marked[i]=1;queue[tail++]=i}};
 for(let x=0;x<w;x++){add(x);add((h-1)*w+x)}for(let y=0;y<h;y++){add(y*w);add(y*w+w-1)}
 while(head<tail){const idx=queue[head++],x=idx%w,y=(idx/w)|0;if(x>0)add(idx-1);if(x+1<w)add(idx+1);if(y>0)add(idx-w);if(y+1<h)add(idx+w)}
+// Safety guard: compare against conservative edge-only background removal.
+// If a higher threshold erases a substantial part of a pale garment, use the
+// conservative mask instead. This protects white down jackets and light tops.
+if(strength>12){
+ const weak=new Uint8Array(w*h),q2=new Int32Array(w*h);let h2=0,t2=0;
+ const weakBg=i=>{const j=i*4,r=a[j],g=a[j+1],b=a[j+2];return a[j+3]<20||(Math.min(r,g,b)>=247&&Math.max(r,g,b)-Math.min(r,g,b)<16)};
+ const add2=i=>{if(!weak[i]&&weakBg(i)){weak[i]=1;q2[t2++]=i}};
+ for(let x=0;x<w;x++){add2(x);add2((h-1)*w+x)}
+ for(let y=0;y<h;y++){add2(y*w);add2(y*w+w-1)}
+ while(h2<t2){const v=q2[h2++],x=v%w,y=(v/w)|0;if(x)add2(v-1);if(x+1<w)add2(v+1);if(y)add2(v-w);if(y+1<h)add2(v+w)}
+ const conservativeForeground=w*h-t2,strongForeground=w*h-tail;
+ if(conservativeForeground>400&&strongForeground<conservativeForeground*.86){
+   marked.set(weak);queue.set(q2.subarray(0,t2));tail=t2;
+ }
+}
 for(let k=0;k<tail;k++){a[queue[k]*4+3]=0}
 // soften hard-edge seams by applying partial transparency on colored fringe pixels
 for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){const idx=y*w+x;if(marked[idx])continue;const j=idx*4;if(a[j+3]<20)continue;const near=marked[idx-1]||marked[idx+1]||marked[idx-w]||marked[idx+w];if(!near)continue;const d=255-Math.min(a[j],a[j+1],a[j+2]);if(d<strength+18){a[j+3]=Math.min(a[j+3],Math.round(255*Math.max(.25,Math.min(1,d/(strength+18)))))} }
-ctx.putImageData(data,0,0);resolve(cv.toDataURL('image/png'))}catch(e){reject(e)}};im.onerror=()=>reject(new Error('讀取衣物照片失敗'));im.src=src})}
+ctx.putImageData(data,0,0);
+// Trim invisible margins AFTER removing the white background. Previous versions
+// enlarged only each 650x750 image box, leaving the actual garment very small.
+// Use an alpha threshold so anti-aliased fringe pixels don't enlarge the bounds.
+let left=w,top=h,right=-1,bottom=-1,visible=0;
+for(let y=0;y<h;y+=2)for(let x=0;x<w;x+=2){
+ const j=(y*w+x)*4;
+ if(a[j+3]>=72){left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);visible++}
+}
+if(right>=left&&bottom>=top&&visible>150){
+ // Small breathing room (4%) without returning to huge white catalog margins.
+ const bw=right-left+1,bh=bottom-top+1;
+ const mx=Math.max(5,Math.round(bw*.045)),my=Math.max(5,Math.round(bh*.045));
+ const x0=Math.max(0,left-mx),y0=Math.max(0,top-my);
+ const x1=Math.min(w,right+mx+1),y1=Math.min(h,bottom+my+1);
+ if((x1-x0)*(y1-y0)<w*h*.89){
+   const cropped=document.createElement('canvas');cropped.width=x1-x0;cropped.height=y1-y0;
+   cropped.getContext('2d').drawImage(cv,x0,y0,cropped.width,cropped.height,0,0,cropped.width,cropped.height);
+   resolve(cropped.toDataURL('image/png'));return;
+ }
+}
+resolve(cv.toDataURL('image/png'))}catch(e){reject(e)}};im.onerror=()=>reject(new Error('讀取衣物照片失敗'));im.src=src})}
 async function updateBoardImages(ids,sequence){if(!boardBgEnabled)return;await Promise.all(ids.map(async id=>{const c=clothes.find(x=>x.id===id);if(!c)return;const key=c.id+':'+boardBgStrength+':'+c.img.length+':'+c.img.slice(-70);let promise=bgCache.get(key);if(!promise){promise=removeWhiteBackground(c.img,boardBgStrength).catch(()=>c.img);bgCache.set(key,promise);if(bgCache.size>150)bgCache.delete(bgCache.keys().next().value)}const src=await promise;if(sequence!==bgRenderSeq||!boardBgEnabled)return;const el=[...$('board').querySelectorAll('.outfit-card')].find(node=>node.dataset.id===id);if(el){const img=el.querySelector('img');if(img)img.src=src}}))}
 
-function boardTier(c){const cat=c?.category||'';if(cat==='配件')return 3;if(cat==='裙子')return 2;if(cat==='褲子')return 2;if(cat==='外套')return 1;return 0}
+function boardTier(c){
+ const cat=c?.category||'';
+ if(cat==='配件')return 0;
+ if(cat==='上衣'||cat==='未分類')return 1;
+ if(cat==='外套')return 2;
+ if(cat==='裙子'||cat==='褲子')return 3;
+ return 1;
+}
+function compactBoardHeight(){
+ // One glance: keep the whole board inside the phone screen,
+ // but allow a little more room so each garment can look larger.
+ const vh=window.visualViewport?.height||window.innerHeight||750;
+ return Math.max(405,Math.min(640,Math.round(vh*.76)));
+}
+let boardSizes={};
+function boardCardSize(id){
+ return boardSizes[id]||{width:34,height:120};
+}
 function autoBoardLayout(ids){
- // Three vertical bands (upper, lower, accessories). No auto-placed card overlaps.
- // Position by percentage in a 3-column layout, with each tier keeping its vertical order.
- const groups=[[],[],[],[]];for(const id of ids){const c=clothes.find(x=>x.id===id);groups[boardTier(c)].push(id)}
- const positions={};let cursor=3;
- const widthPct=31, heightPx=145, gapPx=12;
- const rows=[];
- // Upper garments at the top, outerwear follows; bottoms/skirts in the middle,
- // accessories use rightmost lane by default.
- for(const tier of [0,1,2,3]){
-   const arr=groups[tier];if(!arr.length)continue;
-   const cols=tier===3?1:3;
-   for(let i=0;i<arr.length;i+=cols)rows.push({tier,items:arr.slice(i,i+cols)});
- }
- const height=Math.max(540,rows.length*(heightPx+gapPx)+38);
- $('board').style.height=height+'px';
- let row=0;for(const entry of rows){const y=(16+row*(heightPx+gapPx))/height*100;
-   entry.items.forEach((id,i)=>{let col=entry.tier===3?2:i;positions[id]={x:2+col*33,y};});row++;
- }
+ const H=compactBoardHeight(),board=$('board');board.style.height=H+'px';
+ const entries=ids.map((id,i)=>({id,i,tier:boardTier(clothes.find(x=>x.id===id))}));
+ const groups=[entries.filter(e=>e.tier===0),entries.filter(e=>e.tier===1||e.tier===2),entries.filter(e=>e.tier===3)];
+ // Fixed sizes by clothing type, not the number of garments on the board.
+ // Keep the three visual rows apart without taking away manual drag positioning.
+ const spec=[
+  {width:24,height:83,centerY:1},     // accessories: near the upper edge, with room for the remove button
+  {width:32,height:178,centerY:17.5}, // tops and jackets: lift the row away from the trousers
+  {width:33,height:170,centerY:69}    // trousers and skirts: clear gap beneath upper garments
+ ];
+ const positions={};boardSizes={};
+ groups.forEach((group,g)=>{
+  const s=spec[g];
+  group.forEach((e,i)=>{
+   const col=i%3,row=Math.floor(i/3);
+   // First two garments spread horizontally; subsequent garments may overlap
+   // slightly rather than shrinking every item in an existing outfit.
+   let x;
+   if(group.length===1)x=(100-s.width)/2+(g===0?7:0);
+   else if(col===0)x=g===0?11:4;
+   else if(col===1)x=100-s.width-(g===0?11:4);
+   else x=(100-s.width)/2;
+   let y=s.centerY+row*(g===0?8:g===1?10:8);
+   if(g===0&&i%2===1)y+=2;
+   if(g===1&&i%2===1)y+=3;
+   const maxY=Math.max(1,100-s.height/H*100-2);
+   positions[e.id]={x:Math.max(1,Math.min(99-s.width,x)),y:Math.max(1,Math.min(maxY,y))};
+   boardSizes[e.id]={width:s.width,height:s.height};
+  });
+ });
  return positions;
 }
 function renderBoard(){
  syncBoardBackgroundUi();const sequence=++bgRenderSeq;
  const ids=[...new Set(slots.filter(Boolean))].filter(id=>clothes.some(c=>c.id===id));
  const automatic=autoBoardLayout(ids);const height=$('board').clientHeight||560;
- $('board').innerHTML=ids.map((id,i)=>{const c=clothes.find(x=>x.id===id);const pos=boardPositions[id]||automatic[id];return `<div class="outfit-card" data-id="${id}" style="left:${pos.x}%;top:${pos.y}%;z-index:${i+1}" onpointerdown="boardPointerDown(event,'${id}')"><img src="${c.img}" alt="${esc(c.name)}"><span class="item-tag">#${c.no}</span><button type="button" class="remove" aria-label="移除 #${c.no}" onclick="event.stopPropagation();removeBoardItem('${id}')">×</button></div>`}).join('')+(ids.length?'':'<div class="board-empty">用編號叫出衣服，開始搭配</div>');
+ $('board').innerHTML=ids.map((id,i)=>{const c=clothes.find(x=>x.id===id);const size=boardCardSize(id);const raw=boardPositions[id]||automatic[id];const boardH=$('board').clientHeight||compactBoardHeight();const pos={x:Math.max(0,Math.min(100-size.width,raw.x)),y:Math.max(0,Math.min(100-size.height/boardH*100,raw.y))};return `<div class="outfit-card" data-id="${id}" style="--card-width:${size.width}%;--card-height:${size.height}px;left:${pos.x}%;top:${pos.y}%;z-index:${i+1}" onpointerdown="boardPointerDown(event,'${id}')"><img src="${c.img}" alt="${esc(c.name)}"><span class="item-tag">#${c.no}</span><button type="button" class="remove" aria-label="移除 #${c.no}" onclick="event.stopPropagation();removeBoardItem('${id}')">×</button></div>`}).join('')+(ids.length?'':'<div class="board-empty">用編號叫出衣服，開始搭配</div>');
  // A saved/manual position should not be reset by later automatic layout changes.
  currentAutoPositions=automatic;
  updateBoardImages(ids,sequence);
@@ -385,7 +468,7 @@ function removeBoardItem(id){slots=slots.map(x=>x===id?null:x);delete boardPosit
 function addToBoard(){slotIndex=slots.findIndex(x=>!x);if(slotIndex<0){slotIndex=slots.length;slots.push(null)}chooseSlot(slotIndex)}
 $('board').addEventListener('pointermove',boardPointerMove);$('board').addEventListener('pointerup',boardPointerUp);$('board').addEventListener('pointercancel',boardPointerUp);
 function applyNumbers(){const raw=$('numberEntry').value;const nums=(raw.match(/\d+/g)||[]).map(Number);if(!nums.length)return notify('請輸入衣物編號');const found=[],missing=[];for(const n of nums){const c=clothes.find(x=>x.no===n);if(c)found.push(c.id);else missing.push(n)}slots=found.slice();boardPositions={};renderBoard();$('numberFeedback').textContent=missing.length?'找不到編號：'+missing.join('、'):`已加入 ${found.length} 件單品`;notify('已叫出平面搭配')}
-function chooseSlot(i){slotIndex=i;$('choices').innerHTML=clothes.map(c=>`<div class="item" onclick="setSlot('${c.id}')"><img src="${c.img}"><span class="number">#${c.no}</span><div class="info"><strong>${esc(c.name)}</strong></div></div>`).join('');$('chooser').classList.add('show')}function closeChooser(){$('chooser').classList.remove('show')}function setSlot(id){if(slots.includes(id)){closeChooser();return notify('這件已在畫布上')}slots[slotIndex]=id;closeChooser();renderBoard()}function clearSlots(){slots=[];boardPositions={};$('numberEntry').value='';$('numberFeedback').textContent='';renderBoard()}
+function chooseSlot(i){slotIndex=i;$('choices').innerHTML=clothes.map(c=>`<div class="item" onclick="setSlot('${c.id}')"><img src="${c.img}"><span class="number">#${c.no}</span><div class="info"><strong>${esc(c.name)}</strong></div></div>`).join('');$('chooser').classList.add('show')}function closeChooser(){$('chooser').classList.remove('show')}function setSlot(id){if(slots.includes(id)){closeChooser();return notify('這件已在畫布上')}for(const oldId of slots.filter(Boolean)){if(!boardPositions[oldId]&&currentAutoPositions[oldId])boardPositions[oldId]={...currentAutoPositions[oldId]}}slots[slotIndex]=id;closeChooser();renderBoard()}function clearSlots(){slots=[];boardPositions={};$('numberEntry').value='';$('numberFeedback').textContent='';renderBoard()}
 async function saveLook(){const ids=slots.filter(Boolean);if(!ids.length)return notify('請先加入衣服');const name=$('lookName').value.trim()||'我的穿搭',memo=$('lookMemo').value.trim(),date=$('lookDate').value;await put('looks',{id:crypto.randomUUID(),ids,name,memo,date,positions:Object.fromEntries(ids.filter(id=>boardPositions[id]).map(id=>[id,boardPositions[id]])),background:{enabled:boardBgEnabled,strength:boardBgStrength},created:Date.now()});$('lookName').value='';$('lookMemo').value='';await refresh();notify('穿搭及日記已儲存')}
 function renderLooks(){$('lookList').innerHTML=looks.length?looks.slice().sort((a,b)=>(b.created||0)-(a.created||0)).map(l=>`<div class="card"><div class="row"><strong>${esc(l.name)}</strong><button class="btn light" onclick="loadLook('${l.id}')">打開</button></div><div class="mini">${esc(l.date||'未設定日期')}</div><div class="actions" style="margin:10px 0">${(l.ids||[]).map(id=>{const c=clothes.find(x=>x.id===id);return c?`<div style="text-align:center"><img src="${c.img}" style="width:64px;height:78px;object-fit:contain;border-radius:7px;background:#f6f3ef"><div class="number">#${c.no}</div></div>`:''}).join('')}</div><p class="hint">${esc(l.memo||'')}</p><div class="actions"><button class="btn light" onclick="editLook('${l.id}')">編輯日記</button><button class="btn danger" onclick="deleteLook('${l.id}')">刪除穿搭</button></div></div>`).join(''):'<div class="empty">還沒有儲存穿搭。先到穿搭頁輸入編號吧。</div>'}
 function loadLook(id){const l=looks.find(x=>x.id===id);if(!l)return;slots=(l.ids||[]).slice();boardPositions={...(l.positions||{})};if(l.background){boardBgEnabled=l.background.enabled!==false;boardBgStrength=Math.max(8,Math.min(52,l.background.strength||22));persistBoardBackground()}$('numberEntry').value=slots.map(id=>clothes.find(x=>x.id===id)?.no||'').filter(Boolean).join(' + ');$('lookName').value=l.name;$('lookMemo').value=l.memo||'';$('lookDate').value=l.date||'';go('stylist')}
