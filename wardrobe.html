@@ -101,6 +101,13 @@ nav button b{height:19px}
 .tag-field input[type=text]{flex:1 1 108px;min-width:85px;width:0;padding:6px 3px;border:0;background:transparent;outline:0}
 .tag-field .tag-add{border:0;background:#eee8e0;color:#594436;padding:6px 9px;border-radius:7px;font-size:12px}
 .tag-field .saved-value-menu{top:calc(100% + 5px)}
+/* V4.43 — compact one-row saved outfit preview */
+.look-preview{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:12px 0 15px}
+.look-preview-item{min-width:0;text-align:center;position:relative}
+.look-preview-item img{display:block;width:100%;height:100px;object-fit:contain;background:#f8f6f2;border-radius:8px}
+.look-preview-item .number{position:absolute;right:2px;bottom:2px;font-size:11px;padding:3px 6px}
+.look-count{color:#7c726a;font-size:12px;white-space:nowrap}
+@media(max-width:420px){.look-preview{gap:6px}.look-preview-item img{height:86px}}
 </style></head><body>
 <header><h1>MY WARDROBE</h1></header><main>
 <section class="tab active" id="closet"><div class="row"><h2>我的衣櫃 <span id="total" class="mini"></span></h2><button class="btn" onclick="document.getElementById('upload').click()">＋ 上傳</button></div><input id="upload" type="file" multiple accept="image/*" class="hidden" onchange="uploadFiles(this.files);this.value=''">
@@ -108,7 +115,7 @@ nav button b{height:19px}
 <div class="row" style="margin-bottom:12px"><button class="btn light" onclick="toggleBatch()" id="batchToggle">批量管理</button></div>
 <div id="bulk" class="card hidden"><div class="row"><strong id="selectedCount">已選 0 件</strong><div class="actions"><button class="btn light" onclick="chooseAll()">全選目前分類</button><button class="btn light" onclick="clearSelection()">取消選取</button></div></div><label>批次設定分類</label><div class="actions"><select id="bulkCategory" style="flex:1"></select><button class="btn" onclick="bulkCategoryApply()">套用</button></div><div class="actions" style="margin-top:12px"><button class="btn light" id="bulkCategorizedButton" onclick="bulkMarkImportCategorized()">✓ 批次標記已分類</button><button class="btn outline" onclick="exportSelected()">匯出選取資料</button><button class="btn danger" onclick="bulkDelete()">批次刪除</button></div></div>
 <div class="grid" id="items"></div></section>
-<section class="tab" id="stylist"><div class="row"><h2>穿搭拼貼</h2><button class="btn light" onclick="clearSlots()">清空</button></div><div class="card"><label>衣物編號</label><div class="actions"><input type="text" style="flex:1" id="numberEntry" placeholder="例如 12 + 8 + 23" inputmode="text"><button class="btn" onclick="applyNumbers()">叫出穿搭</button></div><div id="numberFeedback" class="mini" style="margin-top:6px"></div></div><div class="outfit-settings"><button type="button" class="btn light" id="bgModeBtn" onclick="toggleBoardBackground()">白底去背：開</button><label for="bgStrength">去背強度 <span id="bgStrengthValue">22</span></label><input id="bgStrength" type="range" min="8" max="52" step="2" value="22" oninput="setBoardStrength(this.value)" aria-label="白底去背強度"></div><div class="board-wrap"><div id="board" class="outfit-canvas" aria-label="可拖移的暖燕麥色錯位穿搭畫布"></div><button type="button" class="board-add" onclick="addToBoard()" aria-label="加入衣物">＋ 加入</button></div><div class="card"><label>這套穿搭的名稱</label><input id="lookName" type="text" placeholder="例如：週末咖啡散步"><label>小備註／穿搭日記</label><textarea id="lookMemo" rows="3" placeholder="今天穿這套去哪裡、感覺如何…"></textarea><label>穿搭日期（選填）</label><input type="date" id="lookDate" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:10px"><button style="width:100%;margin-top:14px" class="btn" onclick="saveLook()">儲存這套穿搭</button></div></section>
+<section class="tab" id="stylist"><div class="row"><h2>穿搭拼貼</h2><button class="btn light" onclick="clearSlots()">清空</button></div><div class="card"><label>衣物編號</label><div class="actions"><input type="text" style="flex:1" id="numberEntry" placeholder="例如 12 + 8 + 23" inputmode="text"><button class="btn" onclick="applyNumbers()">叫出穿搭</button></div><div id="numberFeedback" class="mini" style="margin-top:6px"></div></div><div class="outfit-settings"><button type="button" class="btn light" id="bgModeBtn" onclick="toggleBoardBackground()">白底去背：開</button><label for="bgStrength">去背強度 <span id="bgStrengthValue">22</span></label><input id="bgStrength" type="range" min="8" max="52" step="2" value="22" oninput="setBoardStrength(this.value)" aria-label="白底去背強度"></div><div class="board-wrap"><div id="board" class="outfit-canvas" aria-label="可拖移的暖燕麥色錯位穿搭畫布"></div><button type="button" class="board-add" onclick="addToBoard()" aria-label="加入衣物">＋ 加入</button></div><div class="card"><label>這套穿搭的名稱</label><input id="lookName" type="text" placeholder="例如：週末咖啡散步"><label>小備註／穿搭日記</label><textarea id="lookMemo" rows="3" placeholder="今天穿這套去哪裡、感覺如何…"></textarea><label>穿搭日期（選填）</label><input type="date" id="lookDate" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:10px"><div id="lookEditStatus" class="mini" style="display:none;margin-top:12px;color:#625044">目前正在編輯已收藏穿搭；儲存變更會更新原本這套。</div><button id="saveLookButton" style="width:100%;margin-top:14px" class="btn" onclick="saveLook()">儲存這套穿搭</button><button id="saveLookAsButton" type="button" class="btn light" style="width:100%;margin-top:9px;display:none" onclick="saveLookAsNew()">另存為新穿搭</button></div></section>
 <section class="tab" id="looks"><h2>我的收藏</h2><div id="lookList"></div></section>
 <section class="tab" id="share"><h2>分享衣櫃給 ChatGPT</h2><div class="card"><strong>同步公開衣櫃（手動上傳 GitHub）</strong><p class="hint">一次準備 closet.html 與 wardrobe-data.json；iPhone 分享時僅包含檔案，不附加文字。儲存後請將兩個檔案上傳 GitHub 並提交。</p><button type="button" class="btn" onclick="syncPublicCloset()">同步公開衣櫃・分享更新檔</button></div><div class="card"><strong>生成可分享的衣櫃網頁</strong><p class="hint">下載 closet.html → 上傳 GitHub → 分享公開網址。</p><button class="btn" onclick="exportPublicCloset()">產生公開衣櫃 closet.html</button><div id="shareExportPanel" class="hidden" style="margin-top:14px"><div class="actions"><button class="btn" onclick="shareClosetFile()">用 iPhone 分享檔案</button><button class="btn light" onclick="copyClosetHTML()">複製 HTML</button><button class="btn light" onclick="downloadClosetFallback()">再試下載</button></div><p class="mini">如果無法分享，點「複製 HTML」再貼進可儲存 .html 的文字編輯器。不要把 121 件衣服的原始 HTML 直接貼到公開訊息。</p><textarea id="closetHTMLExport" readonly style="width:100%;height:105px;font-size:12px;display:none" aria-label="公開衣櫃 HTML"></textarea></div><p class="mini">公開頁面包含衣服照片與名稱，不包含私人日記。</p></div><div class="card"><strong>從公開衣櫃帶入衣服</strong><p class="mini">已將 closet.html 放在 GitHub 同一資料夾？按下即可載入照片、名稱、分類與編號。既有單品不會自動刪除。</p><button class="btn" id="importClosetButton" onclick="importPublishedCloset()">從 closet.html 匯入衣櫃</button><p class="mini" id="closetImportStatus" aria-live="polite"></p></div><div class="card"><strong>備份或搬家</strong><div class="actions"><button class="btn light" onclick="backup()">下載完整備份</button><button class="btn light" onclick="document.getElementById('import').click()">匯入備份</button><input id="import" class="hidden" type="file" accept="application/json" onchange="importBackup(this.files[0]);this.value=''"></div></div></section>
 <section class="tab" id="ask"><h2>問親辜 <span aria-hidden="true">♡</span></h2>
@@ -706,12 +713,41 @@ function renderChooser(){
 }
 function setChooserCategory(cat){chooserCategory=cat;renderChooser();$('chooser').querySelector('.sheet').scrollTop=0}
 function chooseSlot(i){slotIndex=i;chooserCategory='全部';renderChooser();$('chooser').classList.add('show')}
-function closeChooser(){$('chooser').classList.remove('show')}function setSlot(id){if(slots.includes(id)){closeChooser();return notify('這件已在畫布上')}slots[slotIndex]=id;closeChooser();renderBoard()}function clearSlots(){slots=[];boardPositions={};boardManualPositions={};$('numberEntry').value='';$('numberFeedback').textContent='';renderBoard()}
-async function saveLook(){const ids=slots.filter(Boolean);if(!ids.length)return notify('請先加入衣服');const name=$('lookName').value.trim()||'我的穿搭',memo=$('lookMemo').value.trim(),date=$('lookDate').value;await put('looks',{id:crypto.randomUUID(),ids,name,memo,date,positions:Object.fromEntries(ids.filter(id=>boardManualPositions[id]).map(id=>[id,boardManualPositions[id]])),background:{enabled:boardBgEnabled,strength:boardBgStrength},created:Date.now()});$('lookName').value='';$('lookMemo').value='';await refresh();notify('穿搭及日記已儲存')}
-function renderLooks(){$('lookList').innerHTML=looks.length?looks.slice().sort((a,b)=>(b.created||0)-(a.created||0)).map(l=>`<div class="card"><div class="row"><strong>${esc(l.name)}</strong><button class="btn light" onclick="loadLook('${l.id}')">打開</button></div><div class="mini">${esc(l.date||'未設定日期')}</div><div class="actions" style="margin:10px 0">${(l.ids||[]).map(id=>{const c=clothes.find(x=>x.id===id);return c?`<div style="text-align:center"><img src="${c.img}" style="width:64px;height:78px;object-fit:contain;border-radius:7px;background:#f6f3ef"><div class="number">#${c.no}</div></div>`:''}).join('')}</div><p class="hint">${esc(l.memo||'')}</p><div class="actions"><button class="btn light" onclick="editLook('${l.id}')">編輯日記</button><button class="btn danger" onclick="deleteLook('${l.id}')">刪除穿搭</button></div></div>`).join(''):'<div class="empty">還沒有儲存穿搭。先到穿搭頁輸入編號吧。</div>'}
-function loadLook(id){const l=looks.find(x=>x.id===id);if(!l)return;slots=(l.ids||[]).slice();boardManualPositions={...(l.positions||{})};boardPositions={...boardManualPositions};if(l.background){boardBgEnabled=l.background.enabled!==false;boardBgStrength=Math.max(8,Math.min(52,l.background.strength||22));persistBoardBackground()}$('numberEntry').value=slots.map(id=>clothes.find(x=>x.id===id)?.no||'').filter(Boolean).join(' + ');$('lookName').value=l.name;$('lookMemo').value=l.memo||'';$('lookDate').value=l.date||'';go('stylist')}
+function closeChooser(){$('chooser').classList.remove('show')}
+let editingLookId=null;
+function updateLookSaveMode(){
+ const editing=Boolean(editingLookId);
+ $('saveLookButton').textContent=editing?'儲存變更（更新原收藏）':'儲存這套穿搭';
+ $('saveLookAsButton').style.display=editing?'block':'none';
+ $('lookEditStatus').style.display=editing?'block':'none';
+}
+function setSlot(id){if(slots.includes(id)){closeChooser();return notify('這件已在畫布上')}slots[slotIndex]=id;closeChooser();renderBoard()}
+function clearSlots(){slots=[];boardPositions={};boardManualPositions={};editingLookId=null;updateLookSaveMode();$('numberEntry').value='';$('numberFeedback').textContent='';$('lookName').value='';$('lookMemo').value='';$('lookDate').value='';renderBoard()}
+async function saveLook(asNew=false){
+ const ids=[...new Set(slots.filter(Boolean))];if(!ids.length)return notify('請先加入衣服');
+ const name=$('lookName').value.trim()||'我的穿搭',memo=$('lookMemo').value.trim(),date=$('lookDate').value;
+ const original=!asNew&&editingLookId?looks.find(l=>l.id===editingLookId):null;
+ const record={...(original||{}),id:original?.id||crypto.randomUUID(),ids,name,memo,date,
+  positions:Object.fromEntries(ids.filter(id=>boardManualPositions[id]).map(id=>[id,boardManualPositions[id]])),
+  background:{enabled:boardBgEnabled,strength:boardBgStrength},created:original?.created||Date.now(),updated:Date.now()};
+ try{
+  await put('looks',record);
+  if(asNew||!original)editingLookId=record.id;
+  updateLookSaveMode();await refresh();
+  notify(original?'已更新原本收藏，不會重複新增':asNew?'已另存為新穿搭':'穿搭及日記已儲存');
+ }catch(e){console.error(e);notify('儲存失敗，請重試')}
+}
+function saveLookAsNew(){return saveLook(true)}
+function renderLooks(){
+ $('lookList').innerHTML=looks.length?looks.slice().sort((a,b)=>(b.created||0)-(a.created||0)).map(l=>{
+  const items=(l.ids||[]).map(id=>clothes.find(x=>x.id===id)).filter(Boolean);
+  const preview=items.slice(0,4).map(c=>`<div class="look-preview-item"><img src="${c.img}" alt="${esc(c.name||'衣物')}" loading="lazy"><span class="number">#${c.no}</span></div>`).join('');
+  return `<div class="card"><div class="row"><strong>${esc(l.name)}</strong><button class="btn light" onclick="loadLook('${l.id}')">打開</button></div><div class="row" style="margin-top:8px"><span class="mini">${esc(l.date||'未設定日期')}</span><span class="look-count">共 ${items.length} 件${items.length>4?' · 其餘 '+(items.length-4)+' 件已收合':''}</span></div><div class="look-preview">${preview}</div>${l.memo?`<p class="hint">${esc(l.memo)}</p>`:''}<div class="actions"><button class="btn light" onclick="editLook('${l.id}')">編輯日記</button><button class="btn danger" onclick="deleteLook('${l.id}')">刪除穿搭</button></div></div>`;
+ }).join(''):'<div class="empty">還沒有儲存穿搭。先到穿搭頁輸入編號吧。</div>';
+}
+function loadLook(id){const l=looks.find(x=>x.id===id);if(!l)return;editingLookId=l.id;updateLookSaveMode();slots=(l.ids||[]).slice();boardManualPositions={...(l.positions||{})};boardPositions={...boardManualPositions};if(l.background){boardBgEnabled=l.background.enabled!==false;boardBgStrength=Math.max(8,Math.min(52,l.background.strength||22));persistBoardBackground()}$('numberEntry').value=slots.map(id=>clothes.find(x=>x.id===id)?.no||'').filter(Boolean).join(' + ');$('lookName').value=l.name;$('lookMemo').value=l.memo||'';$('lookDate').value=l.date||'';go('stylist')}
 async function editLook(id){const l=looks.find(x=>x.id===id);if(!l)return;const name=prompt('穿搭名稱',l.name);if(name===null)return;const memo=prompt('小備註／穿搭日記',l.memo||'');if(memo===null)return;l.name=name.trim()||l.name;l.memo=memo;await put('looks',l);await refresh()}
-async function deleteLook(id){if(!await askConfirm('確定刪除這套穿搭及日記？衣服本身不受影響。','刪除穿搭'))return;await del('looks',id);await refresh()}
+async function deleteLook(id){if(!await askConfirm('確定刪除這套穿搭及日記？衣服本身不受影響。','刪除穿搭'))return;await del('looks',id);if(editingLookId===id){editingLookId=null;updateLookSaveMode()}await refresh()}
 async function importPublishedCloset(){
  const btn=$('importClosetButton'),status=$('closetImportStatus');
  btn.disabled=true;status.textContent='正在讀取公開衣櫃…';
