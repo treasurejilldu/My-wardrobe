@@ -101,13 +101,14 @@ nav button b{height:19px}
 .tag-field input[type=text]{flex:1 1 108px;min-width:85px;width:0;padding:6px 3px;border:0;background:transparent;outline:0}
 .tag-field .tag-add{border:0;background:#eee8e0;color:#594436;padding:6px 9px;border-radius:7px;font-size:12px}
 .tag-field .saved-value-menu{top:calc(100% + 5px)}
-/* V4.43 — compact one-row saved outfit preview */
-.look-preview{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:12px 0 15px}
+/* V4.44 — five-item one-row preview and full item-number line */
+.look-preview{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:10px 0 9px}
 .look-preview-item{min-width:0;text-align:center;position:relative}
-.look-preview-item img{display:block;width:100%;height:100px;object-fit:contain;background:#f8f6f2;border-radius:8px}
-.look-preview-item .number{position:absolute;right:2px;bottom:2px;font-size:11px;padding:3px 6px}
+.look-preview-item img{display:block;width:100%;height:82px;object-fit:contain;background:#f8f6f2;border-radius:8px}
+.look-preview-item .number{position:absolute;right:1px;bottom:1px;font-size:10px;padding:2px 4px}
 .look-count{color:#7c726a;font-size:12px;white-space:nowrap}
-@media(max-width:420px){.look-preview{gap:6px}.look-preview-item img{height:86px}}
+@media(max-width:420px){.look-preview{gap:4px}.look-preview-item img{height:70px}}
+.look-all-numbers{font-size:12px;line-height:1.55;color:#695b4e;overflow-wrap:anywhere;margin:4px 0 13px}
 </style></head><body>
 <header><h1>MY WARDROBE</h1></header><main>
 <section class="tab active" id="closet"><div class="row"><h2>我的衣櫃 <span id="total" class="mini"></span></h2><button class="btn" onclick="document.getElementById('upload').click()">＋ 上傳</button></div><input id="upload" type="file" multiple accept="image/*" class="hidden" onchange="uploadFiles(this.files);this.value=''">
@@ -741,8 +742,8 @@ function saveLookAsNew(){return saveLook(true)}
 function renderLooks(){
  $('lookList').innerHTML=looks.length?looks.slice().sort((a,b)=>(b.created||0)-(a.created||0)).map(l=>{
   const items=(l.ids||[]).map(id=>clothes.find(x=>x.id===id)).filter(Boolean);
-  const preview=items.slice(0,4).map(c=>`<div class="look-preview-item"><img src="${c.img}" alt="${esc(c.name||'衣物')}" loading="lazy"><span class="number">#${c.no}</span></div>`).join('');
-  return `<div class="card"><div class="row"><strong>${esc(l.name)}</strong><button class="btn light" onclick="loadLook('${l.id}')">打開</button></div><div class="row" style="margin-top:8px"><span class="mini">${esc(l.date||'未設定日期')}</span><span class="look-count">共 ${items.length} 件${items.length>4?' · 其餘 '+(items.length-4)+' 件已收合':''}</span></div><div class="look-preview">${preview}</div>${l.memo?`<p class="hint">${esc(l.memo)}</p>`:''}<div class="actions"><button class="btn light" onclick="editLook('${l.id}')">編輯日記</button><button class="btn danger" onclick="deleteLook('${l.id}')">刪除穿搭</button></div></div>`;
+  const preview=items.slice(0,5).map(c=>`<div class="look-preview-item"><img src="${c.img}" alt="${esc(c.name||'衣物')}" loading="lazy"><span class="number">#${c.no}</span></div>`).join('');
+  return `<div class="card"><div class="row"><strong>${esc(l.name)}</strong><button class="btn light" onclick="loadLook('${l.id}')">打開</button></div><div class="row" style="margin-top:8px"><span class="mini">${esc(l.date||'未設定日期')}</span><span class="look-count">共 ${items.length} 件${items.length>5?' · 其餘 '+(items.length-5)+' 件已收合':''}</span></div><div class="look-preview">${preview}</div><div class="look-all-numbers">完整編號：${items.length?items.map(c=>'#'+c.no).join(' + '):'無可用衣物'}</div>${l.memo?`<p class="hint">${esc(l.memo)}</p>`:''}<div class="actions"><button class="btn light" onclick="editLook('${l.id}')">編輯日記</button><button class="btn danger" onclick="deleteLook('${l.id}')">刪除穿搭</button></div></div>`;
  }).join(''):'<div class="empty">還沒有儲存穿搭。先到穿搭頁輸入編號吧。</div>';
 }
 function loadLook(id){const l=looks.find(x=>x.id===id);if(!l)return;editingLookId=l.id;updateLookSaveMode();slots=(l.ids||[]).slice();boardManualPositions={...(l.positions||{})};boardPositions={...boardManualPositions};if(l.background){boardBgEnabled=l.background.enabled!==false;boardBgStrength=Math.max(8,Math.min(52,l.background.strength||22));persistBoardBackground()}$('numberEntry').value=slots.map(id=>clothes.find(x=>x.id===id)?.no||'').filter(Boolean).join(' + ');$('lookName').value=l.name;$('lookMemo').value=l.memo||'';$('lookDate').value=l.date||'';go('stylist')}
