@@ -140,7 +140,7 @@ nav button b{height:19px}
 <div class="sheet-cover" id="cropLayer" onclick="if(event.target===this)closeCrop()"><div class="sheet"><div class="row"><h2 id="cropTitle">從原圖框選</h2><button class="btn light" onclick="closeCrop()">關閉</button></div><p class="hint">框選衣服範圍，不含下方文字。</p><div id="cropWrap" style="position:relative;touch-action:none;user-select:none;background:#fff;border:1px solid var(--line);margin:14px 0"><img id="cropOriginal" style="display:block;width:100%;height:auto;pointer-events:none"><div id="cropRect" style="display:none;position:absolute;border:2px solid #617761;background:#71887430;pointer-events:none"></div></div><button class="btn" id="cropSaveBtn" onclick="saveCrop()">儲存框選</button></div></div><div class="sheet-cover" id="chooser" onclick="if(event.target===this)closeChooser()"><div class="sheet"><div class="row"><h2>選擇衣服</h2><button class="btn light" onclick="closeChooser()">關閉</button></div><div class="pills" id="chooserFilters" aria-label="篩選衣服分類" style="position:sticky;top:-20px;z-index:3;background:var(--bg);padding:10px 0 12px"></div><div id="choices" class="grid"></div></div></div><div id="toast" class="toast"></div>
 <script>
 window.addEventListener('scroll',()=>{const b=document.getElementById('backTop');if(b)b.classList.toggle('show',window.scrollY>500)},{passive:true});
-const $=id=>document.getElementById(id), cats=['全部','上衣','褲子','裙子','外套','配件','未分類'], CAT=new Set(cats);let db=null,clothes=[],looks=[],reviews=[],reviewCurrent=null,filter='全部',batch=false,selected=new Set(),current=null,changedImg=null,slots=[null,null,null,null,null,null],slotIndex=0,ocrWorker=null;
+const $=id=>document.getElementById(id), cats=['全部','上衣','褲子','裙子','外套','鞋子','配件','未分類'], CAT=new Set(cats);let db=null,clothes=[],looks=[],reviews=[],reviewCurrent=null,filter='全部',batch=false,selected=new Set(),current=null,changedImg=null,slots=[null,null,null,null,null,null],slotIndex=0,ocrWorker=null;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));function notify(s){$('toast').textContent=s;$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',2700)}
 function askConfirm(message,title='確定刪除？',acceptLabel='確定刪除',cancelLabel='取消'){return new Promise(resolve=>{const layer=$('confirmLayer'),yes=$('confirmAccept'),no=$('confirmCancel');$('confirmTitle').textContent=title;$('confirmMessage').textContent=message;yes.textContent=acceptLabel;no.textContent=cancelLabel;yes.classList.toggle('danger',acceptLabel.includes('刪除'));layer.classList.add('show');const finish=answer=>{layer.classList.remove('show');yes.onclick=null;no.onclick=null;layer.onclick=null;resolve(answer)};yes.onclick=()=>finish(true);no.onclick=()=>finish(false);layer.onclick=e=>{if(e.target===layer)finish(false)}})}
 function objectStore(n,m='readonly'){return db.transaction(n,m).objectStore(n)}function all(n){return new Promise((ok,no)=>{const r=objectStore(n).getAll();r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)})}function put(n,v){return new Promise((ok,no)=>{const r=objectStore(n,'readwrite').put(v);r.onsuccess=()=>ok();r.onerror=()=>no(r.error)})}function del(n,k){return new Promise((ok,no)=>{const r=objectStore(n,'readwrite').delete(k);r.onsuccess=()=>ok();r.onerror=()=>no(r.error)})}
@@ -346,7 +346,7 @@ async function recheckNames(){
  }catch(e){console.error(e);notify('重新辨識發生錯誤')}finally{btn.disabled=false}
 }
 
-function infer(text){const t=text.toLowerCase();let cat='未分類';if(/dress|one[- ]?piece|連身|洋裝/.test(t))cat='裙子';else if(/skirt|裙/.test(t))cat='裙子';else if(/pant|trouser|jean|denim|shorts|legging|褲/.test(t))cat='褲子';else if(/jacket|coat|blazer|cardigan|outer|parka|外套|夾克/.test(t))cat='外套';else if(/shirt|blouse|top|tee|t-shirt|sweater|knit|polo|hoodie|vest|tank|襯衫|上衣/.test(t))cat='上衣';else if(/bag|belt|hat|scarf|shoe|sneaker|sock|帽|包|鞋|配件|圍巾/.test(t))cat='配件';const material=(t.match(/cotton|linen|wool|silk|denim|leather|cashmere|polyester|nylon|針織|棉|麻|羊毛|絲|牛仔|皮革/i)||[])[0]||'';return {category:cat,material}}
+function infer(text){const t=text.toLowerCase();let cat='未分類';if(/dress|one[- ]?piece|連身|洋裝/.test(t))cat='裙子';else if(/skirt|裙/.test(t))cat='裙子';else if(/pant|trouser|jean|denim|shorts|legging|褲/.test(t))cat='褲子';else if(/jacket|coat|blazer|cardigan|outer|parka|外套|夾克/.test(t))cat='外套';else if(/shirt|blouse|top|tee|t-shirt|sweater|knit|polo|hoodie|vest|tank|襯衫|上衣/.test(t))cat='上衣';else if(/shoe|sneaker|boot|loafer|sandal|trainer|heel|slipper|footwear|鞋|靴|涼鞋|拖鞋/.test(t))cat='鞋子';else if(/bag|belt|hat|scarf|sock|帽|包|襪|配件|圍巾/.test(t))cat='配件';const material=(t.match(/cotton|linen|wool|silk|denim|leather|cashmere|polyester|nylon|針織|棉|麻|羊毛|絲|牛仔|皮革/i)||[])[0]||'';return {category:cat,material}}
 async function splitSingleProductCard(src){
  const im=new Image();im.src=src;await im.decode();
  const w=im.naturalWidth,h=im.naturalHeight;
@@ -557,6 +557,7 @@ function dressLength(c){
 function boardTier(c){
  const cat=c?.category||'';
  if(cat==='配件')return 0;
+ if(cat==='鞋子')return 4;
  if(isDressItem(c))return 1.5;
  if(cat==='上衣'||cat==='未分類')return 1;
  if(cat==='外套')return 2;
@@ -583,6 +584,7 @@ function autoBoardLayout(ids){
  const topGroup=entries.filter(e=>!e.dress&&e.tier===1);
  const outerGroup=entries.filter(e=>!e.dress&&e.tier===2);
  const lowerGroup=entries.filter(e=>e.tier===3);
+ const shoeGroup=entries.filter(e=>e.tier===4);
  // Keep V4.16 sizes and spacing, while treating dresses as one-piece items
  // that visually occupy both the upper-body and lower-body area.
  const spec={
@@ -590,6 +592,7 @@ function autoBoardLayout(ids){
   top:{width:32,height:178,centerY:17.5},
   outer:{width:32,height:178,centerY:22.5},
   lower:{width:33,height:170,centerY:69},
+  shoe:{width:27,height:100,centerY:77},
   dress:{width:40,height:Math.max(250,Math.min(310,Math.round(H*.58))),centerY:26}
  };
  const positions={};boardSizes={};
@@ -665,6 +668,18 @@ function autoBoardLayout(ids){
   layoutGroup(outerGroup,'outer');
  }
  layoutGroup(lowerGroup,'lower');
+ // Shoes sit below and to the left/right of trousers or skirts. All shoe
+ // previews share the same baseline; one pair stays on the right, while two
+ // pairs use symmetric side lanes. More pairs distribute evenly horizontally.
+ shoeGroup.forEach((e,i)=>{
+  const size=spec.shoe,count=shoeGroup.length;
+  const x=count===1?100-size.width-2:
+   count===2?(i===0?2:100-size.width-2):
+   2+i*((100-size.width-4)/(count-1));
+  const y=Math.min(size.centerY,Math.max(1,100-size.height/H*100-2));
+  positions[e.id]={x,y};
+  boardSizes[e.id]={width:size.width,height:size.height};
+ });
  return positions;
 }
 function renderBoard(){

@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-01T16:41:45.761Z",
-  "count": 122,
+  "updatedAt": "2026-11-02T07:27:23.357Z",
+  "count": 125,
   "clothes": [
     {
       "no": 1,
@@ -361,7 +361,7 @@
       "category": "褲子",
       "brand": "Uniqlo",
       "material": "聚酯纖維",
-      "memo": "垂墜、舒適"
+      "memo": ""
     },
     {
       "no": 46,
@@ -977,6 +977,30 @@
       "category": "外套",
       "brand": "Uniqlo",
       "material": "棉混紡",
+      "memo": ""
+    },
+    {
+      "no": 123,
+      "name": "防水透氣耐磨寬楦低筒健行鞋",
+      "category": "未分類",
+      "brand": "歐都納",
+      "material": "防水",
+      "memo": ""
+    },
+    {
+      "no": 124,
+      "name": "Transport 2 休閒鞋 星塵灰",
+      "category": "未分類",
+      "brand": "HOKA",
+      "material": "防潑水、vibram",
+      "memo": ""
+    },
+    {
+      "no": 125,
+      "name": "SANTOS 經典德訓鞋 白藍",
+      "category": "未分類",
+      "brand": "ept",
+      "material": "皮革、麂皮",
       "memo": ""
     }
   ]
